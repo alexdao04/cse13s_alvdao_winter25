@@ -7,7 +7,7 @@
 
 ## Functions:
 area_of_disk:
-Define M_PI as 3.14159... and then calculate disk area. Disk area is calculated from (A = Pi * R^2) and returns A as double value
+Define M_PI as 3.14159... and then calculate disk area. Disk area is calculated from (A = Pi * R^2) and returns A as our value.
 
 area_of_ring:
 Returns values of outer and inner ring using previous formula. Outer ring and inner ring values calculated from area_of_disk are subtracted and returned. End result is our actual ring area since we're subtracting a smaller ring from a bigger ring.
