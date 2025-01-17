@@ -5,17 +5,7 @@
 
 ## introduction
 
-In this homework, I will do the thing and solve important computer science
-problems and probably win a
-[Turing Award](https://en.wikipedia.org/wiki/Turing_Award) for doing so.
-
-Ok, basically 
-
-## function 1: ???
-
-Explanation:
-
-Functions:
+## Functions:
 area_of_disk:
 Define M_PI as 3.14159... and then calculate disk area. Disk area is calculated from (A = Pi * R^2) and returns A as double value
 
@@ -38,3 +28,5 @@ If C <= A and B, then ((A^2)*(B^2))
 ## the caat program
 
 Explanation: When printing characters that are vowels, we have to identify them first so that we can make sure they print twice. Every vowel, capital or lower-case, gets printed twice: aeiouAEIOU. Consonants and spacing do not.
+
+We can achieve this using a while loop with if and else if statements which identify these characters individually, in order that they print twice in the returned output. This  will prevent any duplicating consonant characters or spacing issues.
