@@ -5,8 +5,9 @@
 
 // For the value of Pi, please use M_PI, which is defined in math.h.
 double area_of_disk(double radius) {
-#define M_PI 3.14159265358979323846 // Defined Pi
-    double area = M_PI * (radius * radius); // A = pi * r^2
+  #define M_PI 3.14159265358979323846 // Defined Pi value
+
+  double area = M_PI * (radius * radius); // A = pi * r^2
   return area; // Store area value
 }
 
@@ -17,27 +18,44 @@ double area_of_ring(double outer_radius, double inner_radius) {
 }
 
 int bigger_minus_smaller(int a, int b) {
-  if (a > b) {
-    return a - b;
+  if (a > b)  { // If a is greater than b
+    return a - b; // Return a - b
   } else {
-    return b - a;
+    return b - a; // Otherwise, return b - a
   }
 }
 
 bool value_in_range(int lower_bound, int x, int upper_bound) {
   if (x >= lower_bound && x <= upper_bound) {
-    return true;
+    return true; // If x is between the lower and upper bounds, return True
   } else {
-    return false;
+    return false; // Otherwise, return False
   }
 }
 
-int sum_of_greater_squares(int a, int b, int c) {
+int sum_of_greater_squares(int a, int b, int c) { // reverse pythagorean theorem lol
+  if (a < 0)  {
+    a = (a * -1); // If a is negative, make it positive
+    return a;
+  }
+
+  if (b < 0)
+  {
+    b = (b * -1); // If b is negative, make it positive
+    return b;
+  }
+
+  if (c < 0)
+  {
+    c = (c * -1); // If c is negative, make it positive
+    return c;
+  }
+
   if (a <= b && a <= c) {
-    return (b * b) + (c * c);
+    return (b * b) + (c * c); // If a <= b and a <= c, return b^2 + c^2 (sum of two bigger numbers)
   } else if (b <= a && b <= c) {
-    return (a * a) + (c * c);
+    return (a * a) + (c * c); // If b <= a and b <= c, return a^2 + c^2 (sum of two bigger numbers, again)
   } else { 
-    return (a * a) + (b * b);
+    return (a * a) + (b * b); // If c <= a and c <= b, return a^2 + b^2 (sum of two bigger numbers, yet again)
   }
 }
