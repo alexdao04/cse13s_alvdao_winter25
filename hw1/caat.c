@@ -1,53 +1,17 @@
 #include <stdio.h>
 
 int main(void) {
-  int ch;
-  while ((ch = getchar()) != EOF) { // this one's gonna be a long one. gonna brute force this one
-    if (ch == 'a') { // start with lowercase vowels
-      putchar('%c', ch);
+  // Finish this program. You'll almost certainly want to use a loop of some
+  // kind, getchar() and putchar(). Remember that the output of getchar() is the
+  // symbol EOF when you get to the end of the input.
+  int vowel_char = getchar();
+  int num_vowels = 0;
+    while ((vowel_char = getchar()) != EOF) { // this is the loop that will duplicate all vowel characters regardless of capitalization
+    if (vowel_char == 'a' || vowel_char == 'e' || vowel_char == 'i' || vowel_char == 'o' || vowel_char == 'u'
+        || vowel_char == 'A' || vowel_char == 'E' || vowel_char == 'I' || vowel_char == 'O' || vowel_char == 'U') {
+      num_vowels += 1;
+      putchar(vowel_char);
+      return 0;
     }
-    else if (ch == 'e')
-    {
-      putchar('%c', ch);
-    }
-    else if (ch == 'i')
-    {
-      putchar('%c', ch);
-    }
-    else if (ch == 'o')
-    {
-      putchar('%c', ch);
-    }
-    else if (ch == 'u')
-    {
-      putchar('%c', ch);
-    }
-    else if (ch == 'A') // then uppercase vowels
-    {
-      putchar('%c', ch);
-    }
-    else if (ch == 'E')
-    {
-      putchar('%c', ch);
-    }
-    else if (ch == 'I')
-    {
-      putchar('%c', ch);
-    }
-    else if (ch == 'O')
-    {
-      putchar('%c', ch);
-    }
-    else if (ch == 'U')
-    {
-      putchar('%c', ch);
-    }
-    else if
-    {
-      putchar('%c', ch);
-    }
-    else
-    {
-      putchar('', ch);
-    }
+}
 }
