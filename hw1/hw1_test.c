@@ -3,44 +3,74 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-// For the value of Pi, please use M_PI, which is defined in math.h.
-double area_of_disk(double radius) {
-  #define M_PI 3.14159265358979323846 // Defined Pi value
-
-  double area = M_PI * (radius * radius); // A = pi * r^2
-  return area; // Store area value
+bool approximately_equal(double a, double b) {
+  // difference is less than 0.001?
+  return fabs(a - b) < 0.001;
 }
 
-double area_of_ring(double outer_radius, double inner_radius) {
-  double outer_area = area_of_disk(outer_radius);
-  double inner_area = area_of_disk(inner_radius);
-  return outer_area - inner_area; // Idea is to calculate the outer and inner ring area separately, then subtract the outer value from the inner to get the ring area.
+void should_be_equal(const char *message, double expected, double actual) {
+  printf("%s\n", message);
+  printf("%s: wanted %f, got %f\n",
+         approximately_equal(expected, actual) ? "SUCCESS" : "FAILURE",
+         expected, actual);
 }
 
-int bigger_minus_smaller(int a, int b) {
-  if (a > b)  { // If a is greater than b
-    return a - b; // Return a - b
-  } else {
-    return b - a; // Otherwise, return b - a
-  }
+void should_be_exactly_equal(const char *message, int expected, int actual) {
+  printf("%s\n", message);
+  printf("%s: wanted %d, got %d\n",
+         (expected == actual) ? "SUCCESS" : "FAILURE", expected, actual);
 }
 
-bool value_in_range(int lower_bound, int x, int upper_bound) {
-  if (x >= lower_bound && x <= upper_bound) {
-    return true; // If x is between the lower and upper bounds, return True
-  } else {
-    return false; // Otherwise, return False
-  }
-}
+int main(void) {
+  printf("**********************\n");
+  printf("tests for area_of_disk\n");
 
-int sum_of_greater_squares(int a, int b, int c) { // reverse pythagorean theorem lol
-  if (a <= b && a <= c) {
-    return (a = (b * b) + (c * c)); // If a <= b and a <= c, return b^2 + c^2 (sum of two bigger numbers)
-  } 
-  if (b <= a && b <= c) {
-    return (b = (a * a) + (c * c)); // If b <= a and b <= c, return a^2 + c^2 (sum of two bigger numbers, again)
-  }
-  if (c <= a && c <= b) { 
-    return (c = (a * a) + (b * b)); // If c <= a and c <= b, return a^2 + b^2 (sum of two bigger numbers, yet again)
-  }
+  should_be_equal("area_of_disk(2.0)", 12.5663, area_of_disk(2.0));
+  should_be_equal("area_of_disk(3.5)", 38.4845, area_of_disk(3.5));
+  should_be_equal("area_of_disk(10.0)", 314.159, area_of_disk(10.0));
+
+  printf("\n**********************\n");
+  printf("tests for area_of_ring\n");
+  should_be_equal("area_of_ring(10.0, 1.0)", 311.018, area_of_ring(10.0, 1.0));
+  should_be_equal("area_of_ring(5.0, 2.0)", 65.973, area_of_ring(5.0, 2.0));
+
+  // Actual size of a standard compact disc in cm^2.
+  should_be_equal("area_of_ring(6.0, 0.75)", 111.33, area_of_ring(6.0, 0.75));
+
+  printf("\n**********************\n");
+  printf("tests for bigger_minus_smaller\n");
+  should_be_exactly_equal("bigger_minus_smaller(10, 5)", 5,
+                          bigger_minus_smaller(10, 5));
+  should_be_exactly_equal("bigger_minus_smaller(5, 10)", 5,
+                          bigger_minus_smaller(5, 10));
+  should_be_exactly_equal("bigger_minus_smaller(10, 10)", 0,
+                          bigger_minus_smaller(10, 10));
+  should_be_exactly_equal("bigger_minus_smaller(10, -10)", 20,
+                          bigger_minus_smaller(10, -10));
+  should_be_exactly_equal("bigger_minus_smaller(-10, -10)", 0,
+                          bigger_minus_smaller(-10, -10));
+
+  printf("\n**********************\n");
+  printf("tests for value_in_range\n");
+  should_be_exactly_equal("value_in_range(0, 2, 5)", true,
+                          value_in_range(0, 2, 5));
+
+  should_be_exactly_equal("value_in_range(0, 0, 5)", true,
+                          value_in_range(0, 0, 5));
+
+  should_be_exactly_equal("value_in_range(0, 10, 5)", false,
+                          value_in_range(0, 10, 5));
+
+  printf("\n**********************\n");
+  printf("tests for sum_of_greater_squares\n");
+  should_be_exactly_equal("sum_of_greater_squares(1, 1, 0)", 2,
+                          sum_of_greater_squares(1, 1, 0));
+
+  should_be_exactly_equal("sum_of_greater_squares(3, 1, 3)", 18,
+                          sum_of_greater_squares(3, 1, 3));
+
+  should_be_exactly_equal("sum_of_greater_squares(1, -5, 0)", 26,
+                          sum_of_greater_squares(1, -5, 0));
+
+  return 0;
 }
