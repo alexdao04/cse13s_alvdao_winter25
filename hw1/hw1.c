@@ -35,12 +35,12 @@ bool value_in_range(int lower_bound, int x, int upper_bound) {
 
 int sum_of_greater_squares(int a, int b, int c) { // reverse pythagorean theorem lol
   if (a <= b && a <= c) {
-    return (int(b * b) + int(c * c)); // If a <= b and a <= c, return b^2 + c^2 (sum of two bigger numbers)
+    return ((b * b) + (c * c)); // If a <= b and a <= c, return b^2 + c^2 (sum of two bigger numbers)
   } 
   else if (b <= a && b <= c) {
-    return (int(a * a) + int(c * c)); // If b <= a and b <= c, return a^2 + c^2 (sum of two bigger numbers, again)
+    return ((a * a) + (c * c)); // If b <= a and b <= c, return a^2 + c^2 (sum of two bigger numbers, again)
   }
   else; { 
-    return (int(a * a) + int(b * b)); // If c <= a and c <= b, return a^2 + b^2 (sum of two bigger numbers, yet again)
+    return ((a * a) + (b * b)); // If c <= a and c <= b, return a^2 + b^2 (sum of two bigger numbers, yet again)
   }
 }
