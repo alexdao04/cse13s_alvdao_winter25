@@ -29,4 +29,4 @@ If C <= A and B, then ((A^2)*(B^2))
 
 Explanation: When printing characters that are vowels, we have to identify them first so that we can make sure they print twice. Every vowel, capital or lower-case, gets printed twice: aeiouAEIOU. Consonants and spacing do not.
 
-We can achieve this using a while loop with if and else if statements which identify these characters individually, in order that they print twice in the returned output. This  will prevent any duplicating consonant characters or spacing issues.
+We can achieve this using a while loop with if and else if statements which identify these characters individually, in order that they print twice in the returned output. This will prevent any duplicating consonant characters or spacing issues.
