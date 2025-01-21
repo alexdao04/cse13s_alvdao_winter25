@@ -1,9 +1,6 @@
 #include <stdio.h>
 
 int main(void) {
-  // Finish this program. You'll almost certainly want to use a loop of some
-  // kind, getchar() and putchar(). Remember that the output of getchar() is the
-  // symbol EOF when you get to the end of the input.
   int vowel_char;
     while ((vowel_char = getchar()) != EOF) { // this is the loop that will duplicate all vowel characters regardless of capitalization
     putchar(vowel_char);
