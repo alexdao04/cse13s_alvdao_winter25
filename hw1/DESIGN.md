@@ -3,9 +3,7 @@
   * author: Alexander Dao
   * date: January 2025
 
-## introduction
-
-## Functions:
+## Functions in hw1.c:
 area_of_disk:
 Define M_PI as 3.14159... and then calculate disk area. Disk area is calculated from (A = Pi * R^2) and returns A as our value.
 
@@ -25,7 +23,7 @@ If A <= B and C, then ((B^2)*(C^2))
 If B <= A and C, then ((A^2)*(C^2))
 If C <= A and B, then ((A^2)*(B^2))
 
-## the caat program
+## The "caat" program
 
 Explanation: When printing characters that are vowels, we have to identify them first so that we can make sure they print twice. Every vowel, capital or lower-case, gets printed twice: aeiouAEIOU. Consonants and spacing do not.
 
