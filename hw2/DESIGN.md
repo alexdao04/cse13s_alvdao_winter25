@@ -1,22 +1,25 @@
 # Homework 2: Design Document
 
-  * author: *Sammy B. Slug* (your name goes here)
+  * author: Alexander Vinh Dao
   * date: January 2025
 
 ## introduction
 
-In this homework, I will address some of the pressing concerns of humanity and
-clarify what it means to live a good human life.
+We've got five different functions to write. The first one finds a "Collatz" value, which according to our assignment's README was:
 
-TODO(you): write something sensible here.
+"half the input number, if that number is even, or (3 times the number) + 1, if that number is odd."
 
-## function 1: ???
+I'm thinking if I write the function iteratively we can just have the program exit as soon as we return a value of 1. I can just write an if condition that checks for that
 
-Explanation goes here...
+For the second function we have to understand a core principle of Collatz numbers: repeating the aforementioned function on any positive value will eventually return a value of 1.
 
-(also do all the other functions. write a sentence or two for each one. this
-homework is still not all that complex, but we'll get there.)
+For the third function we take an array of ints and see which int value in the array is highest without going past the end of the array.
+
+For the fourth function we're simply taking all the positive values in an array and summing them all up, while ignoring negative or zero values and not forgetting to terminate before the array ends.
+
+For the fifth function we're simply counting how many negative elements there are in the array. We're not summing anything up as far as I know.
 
 ## the calculator program
 
-Explanation goes here...
+Basically we have a base-10 value (aka a normal, regular number) that we then apply math operators to (aka +, -, *, /).
+The final value is stored 
