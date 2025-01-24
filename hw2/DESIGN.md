@@ -22,4 +22,6 @@ For the fifth function we're simply counting how many negative elements there ar
 ## the calculator program
 
 Basically we have a base-10 value (aka a normal, regular number) that we then apply math operators to (aka +, -, *, /).
-The final value is stored 
+The final value is stored and returned as a single number with a newline, as stated in the README documentation.
+
+I'm thinking I do a print statement implementation and combine the current running number with the number we read from our given file. The returned value gets printed to make sure we got the right value and then that's it.
