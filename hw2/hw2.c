@@ -33,20 +33,33 @@ int count_collatz_steps(int n) {
   }
 
 int maximum(int *nums, int len) {
-  UNUSED(nums);
-  UNUSED(len);
-  return 0;
+  int(nums);
+    while(len != 0) {
+      if(nums[0] > nums[1]) {
+        return nums[0];
+      } else {
+        return nums[1];
+      }
+    }
 }
 
 int sum_positive(int *nums, int len) {
-  while(len !=)
-  UNUSED(nums);
-  UNUSED(len);
-  return 0;
+  int sum = 0;
+    for (int i = 0; i < len; i++) {
+      if(nums[i] > 0) {
+        sum += nums[i];
+      }
+    }
+    return(sum);
 }
 
 int count_negative(int *nums, int len) {
-  UNUSED(nums);
-  UNUSED(len);
-  return 0;
+  int(nums);
+  int count = 0;
+    for (int i = 0; i < len; i++) {
+      if(nums[i] < 0) {
+        count++;
+      }
+    }
+    return(count);
 }

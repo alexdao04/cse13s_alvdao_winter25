@@ -31,6 +31,7 @@ int main(int argc, char *argv[]) {
   while (fgets(buffer, BUFSIZE, infile)) {
     // TODO: implement the calculator.
     remove_newline(buffer, BUFSIZE);
+    
 
     // You should remove the following line. This is just to show that we are
     // reading in lines from the input file.
