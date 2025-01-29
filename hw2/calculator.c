@@ -31,6 +31,12 @@ int main(int argc, char *argv[]) {
   while (fgets(buffer, BUFSIZE, infile)) {
     // TODO: implement the calculator.
     remove_newline(buffer, BUFSIZE);
+      if(buffer)
+        printf("ERROR\n");
+      else
+        printf("1\n");
+
+
     
 
     // You should remove the following line. This is just to show that we are
