@@ -66,9 +66,8 @@ int main(int argc, char *argv[]) { // main function
               return 1; // and return
         }
       }
-    printf("ERROR\n");
   }
-  printf("%ld\n", running_number); // prints the final result
+  printf("%ld\n", running_number); // prints the running number
   fclose(infile); // closes the file
   return 0;
 }
