@@ -9,38 +9,30 @@
 #include "hw2.h"
 
 int next_collatz_number(int n) {
-  while(n != 1) {
-    if(n % 2) {
-      n = (n / 2);
+    if(n % 2 == 0) {
+      return(n / 2);
     } else {
       n = (3 * n + 1);
-    }
-      return n;
     }
 }
 
 int count_collatz_steps(int n) {
   int count = 0;
   while(n != 1) {
-    if(n % 2) {
-      n = (n / 2);
-    } else {
-      n = (3 * n + 1);
-    }
+    n = next_collatz_number(n);
     count++;
   }
   return count;
   }
 
 int maximum(int *nums, int len) {
-  int(nums);
-    while(len != 0) {
-      if(nums[0] > nums[1]) {
-        return nums[0];
-      } else {
-        return nums[1];
+  int max = nums[0];
+    for (int i = 0; i < len; i++) {
+      if(nums[i] > max) {
+        max = nums[i];
       }
     }
+    return max;
 }
 
 int sum_positive(int *nums, int len) {
@@ -54,12 +46,11 @@ int sum_positive(int *nums, int len) {
 }
 
 int count_negative(int *nums, int len) {
-  int(nums);
-  int count = 0;
-    for (int i = 0; i < len; i++) {
-      if(nums[i] < 0) {
-        count++;
+    int count = 0;
+      for (int i = 0; i < len; i++) {
+        if(nums[i] < 0) {
+          count++;
+        }
       }
-    }
-    return(count);
+        return(count);
 }
