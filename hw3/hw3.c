@@ -54,7 +54,7 @@ bool str_is_palindrome(char *s) { // returns true if the string "s" is a palindr
   return false;
 }
 
-float dot_product(float *vec_a, float *vec_b, int length) { // returns the dot product of two vectors
+float dot_product(float *vec_a, float *vec_b, int length) { // returns the dot product of two vectors.
   UNUSED(vec_a); 
   UNUSED(vec_b);
   UNUSED(length);
