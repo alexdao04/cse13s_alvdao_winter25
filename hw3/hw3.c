@@ -13,23 +13,29 @@
 bool str_suffix(char *haystack, char *needle) {
 // returns true if the string "needle" is a suffix of the string "haystack"
 // what this means is, we assume the string "needle" is at the end of the string "haystack"
+// this is because we assume the length of needle is <= the length of haystack
+// "needle" and "haystack" are placeholders for the actual strings we're comparing
 
   int length_of_haystack = strlen(haystack); 
-  // we get the string length of the haystack
+  // string length of the haystack variable
+
   int length_of_needle = strlen(needle); 
-  // we get the string length of the needle
+  // string length of the needle variable
 
   if(length_of_needle > length_of_haystack) { 
     // if the needle string length is greater than the haystack string
+
     return false; 
     // we return a false bool
+    // why? because the needle string cant be greater than the haystack string 
+    // and still be a suffix of it. 
+    // we're doing something like index slicing in python, but not exactly.
+
   }
 
   return strcmp(haystack + length_of_haystack - length_of_needle, needle) == 0; 
   // this compares our haystack string to our needle string; 
   // is the needle string at the end of the haystack?
-  // why does this matter for us? because we're looking for a suffix, 
-  // and the suffix is at the end of the string
 
 }
 
@@ -49,7 +55,7 @@ bool str_is_palindrome(char *s) { // returns true if the string "s" is a palindr
 }
 
 float dot_product(float *vec_a, float *vec_b, int length) { // returns the dot product of two vectors
-  UNUSED(vec_a);
+  UNUSED(vec_a); 
   UNUSED(vec_b);
   UNUSED(length);
   return 0; // sum of the products of the respective elements of the two arrays
