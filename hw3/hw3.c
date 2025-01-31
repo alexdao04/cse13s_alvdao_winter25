@@ -10,25 +10,27 @@
 #include <stdlib.h>
 #include <string.h>
 
-bool str_suffix(char *haystack, char *needle) { // returns true if the string "needle" is a suffix of the string "haystack"
-  while(haystack)
-    if(strstr(haystack, needle) != NULL) {
-      return true;
-    } else{
-      return false;
-    }
-  while(needle)
-    if(strstr(needle, haystack) != NULL) {
-      return true;
-    } else {
-      return false;
-    }
-  char *suffix = strstr(haystack, needle);
-  if(suffix != NULL) {
-    return true;
-  } else {
-    return false;
+bool str_suffix(char *haystack, char *needle) {
+// returns true if the string "needle" is a suffix of the string "haystack"
+// what this means is, we assume the string "needle" is at the end of the string "haystack"
+
+  int length_of_haystack = strlen(haystack); 
+  // we get the string length of the haystack
+  int length_of_needle = strlen(needle); 
+  // we get the string length of the needle
+
+  if(length_of_needle > length_of_haystack) { 
+    // if the needle string length is greater than the haystack string
+    return false; 
+    // we return a false bool
   }
+
+  return strcmp(haystack + length_of_haystack - length_of_needle, needle) == 0; 
+  // this compares our haystack string to our needle string; 
+  // is the needle string at the end of the haystack?
+  // why does this matter for us? because we're looking for a suffix, 
+  // and the suffix is at the end of the string
+
 }
 
 char *str_repeat(char *s, int n) { // returns a string thats the input string "s" repeated "n" times
