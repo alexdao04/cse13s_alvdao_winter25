@@ -11,9 +11,24 @@
 #include <string.h>
 
 bool str_suffix(char *haystack, char *needle) { // returns true if the string "needle" is a suffix of the string "haystack"
-  UNUSED(haystack);
-  UNUSED(needle);
-  return false;
+  while(haystack)
+    if(strstr(haystack, needle) != NULL) {
+      return true;
+    } else{
+      return false;
+    }
+  while(needle)
+    if(strstr(needle, haystack) != NULL) {
+      return true;
+    } else {
+      return false;
+    }
+  char *suffix = strstr(haystack, needle);
+  if(suffix != NULL) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 char *str_repeat(char *s, int n) { // returns a string thats the input string "s" repeated "n" times

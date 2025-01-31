@@ -2,11 +2,11 @@
 # CSE 13S Homework #3
 
 # Introduction
-*Here we have seven different functions to complete, similarly to our previous assignments.*
-*We're gonna run through each individually and break down how we're gonna do this.*
+*Here, we have seven different functions to complete, similarly to our previous assignments.*
+*We're gonna run through each individually, in order from first to last, and break down how we're going to approach this.*
 
 # Function 1: "str_suffix"
-This function returns a True boolean if the string "needle" is a suffix of the string "haystack"
+This function returns a True boolean if the string "needle" is a suffix of the string "haystack". Some ways that we could implement this are 
 
 # Function 2: "str_repeat"
 This function returns a string thats the input string "s" repeated "n" amount of times. We call malloc() to allocate memory for the resulting output string, and then return the value.
