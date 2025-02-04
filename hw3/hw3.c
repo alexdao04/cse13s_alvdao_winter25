@@ -29,15 +29,14 @@ bool str_suffix(char *haystack, char *needle) {
     // we return a false bool
     // why? because the needle string cant be greater than the haystack string 
     // and still be a suffix of it. 
-    // we're doing something like index slicing in python, but not exactly.
-
+      // we're doing something like index slicing in python, but not exactly.
+    }
+    
+    return strcmp(haystack + length_of_haystack - length_of_needle, needle) == 0; 
+    // this compares our haystack string to our needle string; 
+    // is the needle string at the end of the haystack?
   }
 
-  return strcmp(haystack + length_of_haystack - length_of_needle, needle) == 0; 
-  // this compares our haystack string to our needle string; 
-  // is the needle string at the end of the haystack?
-
-}
 
 char *str_repeat(char *s, int n) { 
 // returns a string thats the input string "s" repeated "n" times
@@ -86,7 +85,6 @@ char *str_repeat(char *s, int n) {
 
     return out; 
     // returns the output string
-
 }
 
 bool str_is_palindrome(char *s) {
@@ -145,8 +143,9 @@ int reduce(int *nums, int length, int (*f)(int, int), int initial) {
   // combines all elements of an array into a single value
   // the function applies to the first element 
   // and then applies to the rest like a domino effect
-  // for some damn reason, the returned values are way off from my test cases
-  // i'm not sure why, but we'll figure it out
+  // nums represents the array, length is the length of the array
+  // f is the function that will be applied to the elements of the array
+  // initial is the initial value of the function
 
   if(length == 0) { 
     // if the length of the array is 0
@@ -154,14 +153,19 @@ int reduce(int *nums, int length, int (*f)(int, int), int initial) {
     return initial; 
     // return the initial value
 
-    } else {
+      } else { 
+        // if the length of the array is greater than or equal to 1
 
-      return f(nums[0], reduce(nums + 1, length - 1, f, initial));
-      // return the result of the function f applied to the first element of the array 
-      // and the result of the function f applied to the rest of the array
+          return f(nums[0], reduce(nums + 1, length - 1, f, initial));
+          // return the result of the function f applied to the first element of the array 
+          // and the result of the function f applied to the rest of the array
+        }
+        // this is a recursive function. its a helper function that the two functions below call
+        // as we stated above, this is our problematic part. its not reducing the array properly
+        // the reason why for this is that we're not applying the function to the rest of the array
 
   }
-}
+
 
 // These two functions will end up as a *single call to reduce*, but you'll have
 // to write a new helper function for each of them. Those helper functions will
@@ -190,9 +194,6 @@ int maximum_with_reduce(int *nums, int length) {
       // return the maximum value in the array
 
     }
-      return 0; 
-      // returns the maximum element in the array
-
 }
 
 int sum_positive(int a, int b) { 
@@ -216,8 +217,4 @@ int sum_positive_with_reduce(int *nums, int length) { // does the same thing as 
     // return the sum of all positive elements in the array
 
   }
-
-  return 0; 
-  // returns the sum of all positive elements in the array
-
 }
