@@ -48,12 +48,43 @@ char *str_repeat(char *s, int n) {
   int s_repeat = s_length * n; 
   // repeats the input string "s" "n" times
 
-  char *out = malloc(sizeof(char) * s_repeat); 
-  // allocates memory for the output string
-  out[0] = '\0';
+    char *out = malloc(sizeof(char) * s_repeat); 
+    // allocates memory for the output string
 
-  return out; 
-  // returns the output string
+    out[0] = '\0';
+
+    while(n > 0) { 
+      // while the input integer "n" is greater than 0
+
+      strcat(out, s); 
+      // concatenates the input string "s" to the output string
+
+      n--; 
+      // decrements the input integer "n"
+
+    }
+    if(n == 0) { 
+      // if the input integer "n" is 0
+
+      } else {
+
+        char *out = malloc(sizeof(char) * s_repeat + 1); 
+        // allocates memory for the output string
+
+        out[0] = '\0'; 
+        // sets the first character of the output string to null
+
+        for(int i = 0; i < n; i++) { 
+        // iterates through the input integer "n"
+
+        strcat(out, s); 
+        // concatenates the input string "s" to the output string
+
+      }
+    }
+
+    return out; 
+    // returns the output string
 
 }
 
@@ -114,8 +145,7 @@ int reduce(int *nums, int length, int (*f)(int, int), int initial) {
 
     } else {
 
-      return f(nums[0], reduce(nums + 1, length - 1, f, initial)); 
-      return 0;
+      return f(nums[0], reduce(nums + 1, length - 1, f, initial));
       // return the result of the function f applied to the first element of the array 
       // and the result of the function f applied to the rest of the array
 
