@@ -40,7 +40,7 @@ bool str_suffix(char *haystack, char *needle) {
 }
 
 char *str_repeat(char *s, int n) { 
-  // returns a string thats the input string "s" repeated "n" times
+// returns a string thats the input string "s" repeated "n" times
 
   int s_length = strlen(s); 
   // length of the input string "s"
@@ -63,6 +63,7 @@ char *str_repeat(char *s, int n) {
       // decrements the input integer "n"
 
     }
+    
     if(n == 0) { 
       // if the input integer "n" is 0
 
@@ -88,9 +89,16 @@ char *str_repeat(char *s, int n) {
 
 }
 
-bool str_is_palindrome(char *s) { // returns true if the string "s" is a palindrome
+bool str_is_palindrome(char *s) {
+  // returns true if the string "s" is a palindrome
+  // a palindrome spells the same forwards and backwards
+  // with that said, my current implementation is incorrect
+  // it handles simple cases
+  // but not cases with spaces or special characters
+
   while(*s) { 
     // while the string "s" is not empty
+
     int h = strlen(s); 
     // length of the string "s"
 
@@ -126,6 +134,7 @@ float dot_product(float *vec_a, float *vec_b, int length) {
     // return 0
 
     } else {
+
       return vec_a[0] * vec_b[0] + dot_product(vec_a + 1, vec_b + 1, length - 1); 
       // return the sum of the products of the respective elements of the two arrays
 
@@ -136,6 +145,8 @@ int reduce(int *nums, int length, int (*f)(int, int), int initial) {
   // combines all elements of an array into a single value
   // the function applies to the first element 
   // and then applies to the rest like a domino effect
+  // for some damn reason, the returned values are way off from my test cases
+  // i'm not sure why, but we'll figure it out
 
   if(length == 0) { 
     // if the length of the array is 0
@@ -174,6 +185,7 @@ int maximum_with_reduce(int *nums, int length) {
       // return the minimum integer value
 
     } else {
+
       return reduce(nums, length, maximum, INT_MIN); 
       // return the maximum value in the array
 
