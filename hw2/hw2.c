@@ -14,6 +14,7 @@ int next_collatz_number(int n) { // basic collatz formula as described in assign
     } else {
       n = (3 * n + 1); // if n is odd, multiply by 3 and add 1
     }
+    return n; // return the next number in the sequence
 }
 
 int count_collatz_steps(int n) { // step counter
