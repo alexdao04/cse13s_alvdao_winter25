@@ -146,26 +146,18 @@ int reduce(int *nums, int length, int (*f)(int, int), int initial) {
   // nums represents the array, length is the length of the array
   // f is the function that will be applied to the elements of the array
   // initial is the initial value of the function
+    int out = initial;
+    for(int i = 0; i < length; i++) { 
+      // iterates through the array
 
-  if(length == 0) { 
-    // if the length of the array is 0
+      out = f(out, nums[i]); 
+      // applies the function to the elements of the array
 
-    return initial; 
-    // return the initial value
-
-      } else { 
-        // if the length of the array is greater than or equal to 1
-
-          return f(nums[0], reduce(nums + 1, length - 1, f, initial));
-          // return the result of the function f applied to the first element of the array 
-          // and the result of the function f applied to the rest of the array
-        }
-        // this is a recursive function. its a helper function that the two functions below call
-        // as we stated above, this is our problematic part. its not reducing the array properly
-        // the reason why for this is that we're not applying the function to the rest of the array
+    }
+    
+    return out;
 
   }
-
 
 // These two functions will end up as a *single call to reduce*, but you'll have
 // to write a new helper function for each of them. Those helper functions will
@@ -199,7 +191,7 @@ int maximum_with_reduce(int *nums, int length) {
 int sum_positive(int a, int b) { 
   // helper function to find the sum of all positive elements in an array
 
-  return (a > 0 ? a : 0) + b; 
+  return (a > 0 ? a : 0) + (b > 0 ? b : 0); 
   // returns the sum of all positive elements in the array
 
 } 
