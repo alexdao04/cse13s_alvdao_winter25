@@ -12,19 +12,27 @@ This is basically where all our basic commands and operations within this text e
 This is where a majority of the work I'm doing is going to go.
 
 *"ll_text *append_text"*
-
-*"ll_text_length"*
+A way of approaching this is a function that adds the node manually to our list using a formula. Return our new front of list afterwards.
 
 *"ll_text *insert_text"*
+Adds another node, but at a given position in the list. Return value should be the new front of the list. Similar approach to append_text.
 
 *"ll_text *delete_text"*
+Deletes a node at a given position in the list instead of adding it like we would in "*insert_text". Return value is the new front of the list.
 
 *"ll_text *replace_text"*
+Overwrites text at given node position with a different text. May require storing to heap.
 
 *"ll_text *duplicate_ll_text"*
+Copies the entire linked list.
+Output should be the front of our "new" list.
+Likely need to remove the old one, but how I'll implement the copy feature is going to be my challenge...
 
 *"ll_text_stack *push_duplicate"*
+Writes to the stack again with a copy of the ll_text linked list.
 
 *"ll_text_stack *push_empty"*
+Writes a new, empty entry to the stack instead.
 
 *"ll_text_stack *pop_stack"*
+Frees memory and removes top entry in the stack. Should clean everything up and removes anything allocated.
