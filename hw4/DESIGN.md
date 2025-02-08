@@ -30,9 +30,12 @@ Likely need to remove the old one, but how I'll implement the copy feature is go
 
 *"ll_text_stack *push_duplicate"*
 Writes to the stack again with a copy of the ll_text linked list.
+Same issue as duplicate_ll_text, the copy part might be my issue here
 
 *"ll_text_stack *push_empty"*
 Writes a new, empty entry to the stack instead.
+Just write a null character or something lol
 
 *"ll_text_stack *pop_stack"*
 Frees memory and removes top entry in the stack. Should clean everything up and removes anything allocated.
+Might be a good idea to review that reduce function that I used in hw3. The logic used there might be similar..
