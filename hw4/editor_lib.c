@@ -150,21 +150,31 @@ ll_text_stack *new_stack_empty_text(void) {
 // Push a new state onto the stack that's an exact copy of the state currently
 // at the top.
 ll_text_stack *push_duplicate(ll_text_stack *stack) {
+  // stack is the stack we're adding to
+  // we want to return the resulting stack
+
   UNUSED(stack);
-  return NULL;
+  return stack;
 }
 
 // Push a new entry onto the stack that has an empty ll_text at the top.
+
 ll_text_stack *push_empty(ll_text_stack *stack) {
+  // again, we're adding to and returning our resultant stack
+
   UNUSED(stack);
-  return NULL;
+  return stack;
 }
 
 // undo, removing the most recent state
 // this has to free all the memory associated with that state
 ll_text_stack *pop_stack(ll_text_stack *stack) {
+  // stack is the stack we're adding to
+  // might i repeat myself? 
+  // just look at what i did above to find out what we're returning
+
   UNUSED(stack);
-  return NULL;
+  return stack;
 }
 
 // Find the first newline in the input and replace it with \0
