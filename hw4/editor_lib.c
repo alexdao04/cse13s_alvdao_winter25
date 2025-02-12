@@ -90,11 +90,16 @@ ll_text *insert_text(ll_text *list, char *text, int position) {
 ll_text *delete_text(ll_text *list, int position) { 
   // position is the line number
   // list is the head of the linked list (what we're adding to)
-  // set list to NULL to start
+  // we want to free the memory of the text (hence the name delete_text)
+  // a way of doing this is to set the text to NULL
   // here, what we want to return is the resulting linked list
 
-  UNUSED(list);
-  UNUSED(position);
+  list = NULL;
+  // we're deleting the text, so we set it to NULL
+
+  int line_number = position;
+  // line_number is the position of the line we want to delete
+
   return NULL;
 }
 
@@ -109,9 +114,15 @@ ll_text *replace_text(ll_text *list, char *text, int position) {
   // set text to a duplicate of the string
   // return resulting linked list (list)
 
-  UNUSED(list);
-  UNUSED(text);
-  UNUSED(position);
+  list = NULL;
+  // we're replacing the text, so we set it to NULL
+
+  strcpy(text, list);
+  // copy the text to the list
+
+  int line_position = position;
+  // line_position is the position of the line we want to replace
+
   return NULL;
 }
 
@@ -153,7 +164,9 @@ ll_text_stack *push_duplicate(ll_text_stack *stack) {
   // stack is the stack we're adding to
   // we want to return the resulting stack
 
-  UNUSED(stack);
+  strdup(stack);
+  // duplicate the stack
+
   return stack;
 }
 
@@ -161,19 +174,24 @@ ll_text_stack *push_duplicate(ll_text_stack *stack) {
 
 ll_text_stack *push_empty(ll_text_stack *stack) {
   // again, we're adding to and returning our resultant stack
-
-  UNUSED(stack);
+  strdup(stack);
+  // duplicate the stack
+  stack = NULL;
+  // set the stack to NULL
   return stack;
+  // return the stack, which now has an empty ll_text
 }
 
 // undo, removing the most recent state
 // this has to free all the memory associated with that state
 ll_text_stack *pop_stack(ll_text_stack *stack) {
   // stack is the stack we're adding to
-  // might i repeat myself? 
-  // just look at what i did above to find out what we're returning
+  // might i repeat myself? just look at what i did above 
+  // if you don't know what i'm returning
 
-  UNUSED(stack);
+  pop_stack(stack);
+  // pop the stack
+  
   return stack;
 }
 
