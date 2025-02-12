@@ -6,10 +6,22 @@
 
 // Functions about ll_text...
 // append a line: add to the end of the linked list
-ll_text *append_text(ll_text *list, char *text) {
-  UNUSED(list);
-  UNUSED(text);
-  return NULL;
+ll_text *append_text(ll_text *list, char *text) { 
+  list = NULL;  
+  // list is empty for now, but we will add to it
+  
+  text = strdup(text); 
+  // strdup function duplicates the string
+
+  ll_text *next_element = malloc(sizeof(ll_text)); 
+  // malloc allocates heap memory
+  next_element -> next = list; 
+  // assign the next element to the list
+  next_element -> text = text;
+  // assign the text to the new element
+  list = next_element;
+
+  return list;
 }
 
 void save_to_file(ll_text *list, const char *filename) {
@@ -21,8 +33,17 @@ void save_to_file(ll_text *list, const char *filename) {
 }
 
 int ll_text_length(ll_text *list) {
-  UNUSED(list);
-  return 0;
+
+  int text_length = 0; 
+  // starts incrementing from 0 to get our length
+
+  for (ll_text *here = list; here; here = here->next) {
+    text_length++;
+
+  }
+
+  return text_length;
+
 }
 
 // insert a specific line: add to specific place in the linked list; this is the
