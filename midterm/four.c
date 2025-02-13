@@ -1,6 +1,9 @@
 #include "midterm.h"
-
 #include <stdio.h>
+
+// Function declarations
+int compare_customers(ShoeCustomer a, ShoeCustomer b);
+void swap_customers(ShoeCustomer *a, ShoeCustomer *b);
 
 // PROBLEM 3
 void bubble_sort_customers(ShoeCustomer *customers, size_t n_customers) {
@@ -11,7 +14,7 @@ void bubble_sort_customers(ShoeCustomer *customers, size_t n_customers) {
   // You can use the compare_customers function to compare two customers.
   // You can use the get_n_purchases function to get the number of purchases of a customer.
   // You can use the get_name function to get the name of a customer.
-  
+
   for(size_t i = 0; i < n_customers; i++) {
   // increments through number of customers
 
