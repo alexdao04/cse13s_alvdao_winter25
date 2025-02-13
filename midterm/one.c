@@ -5,14 +5,6 @@ long long *factorial_numbers(size_t n) {
   // The array should be of length n.
   // Recall the first few entries should be 1, 1, 2, 6, 24, 120...
 
-  if (n == 0) {
-    // when n is 0 
-
-    return 1;
-    // return 1 (because 0! is 1)
-
-  }
-
   long long *factorial = malloc(n * sizeof(long long)); 
   // allocate our memory for the array
 
@@ -25,13 +17,13 @@ long long *factorial_numbers(size_t n) {
   }
 
   factorial[0] = 1;
-  // first entry is 1
+  // first entry is 1 (0! = 1)
 
   for (size_t i = 1; i < n; i++) {
     // iterate through the array
 
-    factorial[i] = factorial[i - 1] * (i + 1);
-    // fill in the rest of the array
+    factorial[i] = factorial[i - 1] * (i);
+    // fill in the rest of the array with our next factorial number
 
   }
 
