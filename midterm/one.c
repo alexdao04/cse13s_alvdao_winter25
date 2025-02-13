@@ -9,7 +9,7 @@ long long *factorial_numbers(size_t n) {
   // allocate our memory for the array
 
   if (factorial == NULL) {
-    // when the array is NULL
+  // when the array is NULL
 
     return NULL;
     // return NULL because there's nothing there
@@ -28,6 +28,6 @@ long long *factorial_numbers(size_t n) {
   }
 
   return factorial;
-    // return the array
+  // return the values of the array
 
 }
