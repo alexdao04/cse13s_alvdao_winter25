@@ -16,7 +16,27 @@ ll_float *delete_range(ll_float *list, float start, float end) {
 
   end = 0;
   // end is the end of the range to delete
+ 
+  while(list != NULL) {
+    // while the list is not empty
 
-  return NULL;
-  // return the resulting linked list
+    if(list->value >= start && list->value <= end) {
+      // if the value is within both start and end range
+
+      list = list->next;
+      // move to the next value
+
+    } else {
+      // if the value is not within the range
+      list = list->next;
+      // move to the next value
+    }
+
+      list = list->next;
+      // move to the next value
+
+    }
+
+    return list;
+    // return the resulting linked list
 }

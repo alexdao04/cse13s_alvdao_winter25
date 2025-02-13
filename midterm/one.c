@@ -6,10 +6,10 @@ long long *factorial_numbers(size_t n) {
   // Recall the first few entries should be 1, 1, 2, 6, 24, 120...
 
   if (n == 0) {
-    // when n is 0 (false)
+    // when n is 0 
 
-    return NULL;
-    // return NULL
+    return 1;
+    // return 1 (because 0! is 1)
 
   }
 
@@ -20,7 +20,7 @@ long long *factorial_numbers(size_t n) {
     // when the array is NULL
 
     return NULL;
-    // return NULL
+    // return NULL because there's nothing there
 
   }
 
@@ -37,5 +37,5 @@ long long *factorial_numbers(size_t n) {
 
   return factorial;
     // return the array
-    
+
 }
