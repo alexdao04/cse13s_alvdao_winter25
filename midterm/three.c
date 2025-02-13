@@ -13,17 +13,13 @@ size_t count_strings_with_property(bool (*property)(char *), char **strings,
 
   property = NULL;
   // property is a function that takes a string and returns a boolean
-  // we set it to NULL because we're not using it yet
-  // this is because we're not using the property function yet
-
+  
   strings = NULL;
   // strings is an array of strings
-  // we set it to NULL because we're not using it yet
-  // this is because we're not using the strings array yet
 
   len = 0;
   // len is the length of the array
-  // we set it to 0 because we're not using it yet
+  // we set it to 0 to begin iterating through the array
 
   return 0;
 }

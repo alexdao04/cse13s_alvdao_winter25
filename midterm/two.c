@@ -28,6 +28,7 @@ ll_float *delete_range(ll_float *list, float start, float end) {
 
     } else {
       // if the value is not within the range
+
       list = list->next;
       // move to the next value
     }
