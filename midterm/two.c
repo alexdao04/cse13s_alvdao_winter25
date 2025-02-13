@@ -8,36 +8,52 @@ ll_float *delete_range(ll_float *list, float start, float end) {
   // end is the end of the range to delete
   // we want to return the resulting linked list
 
-  list = NULL;
-  // we're deleting the range, so we set it to NULL
+  ll_float *previous = NULL;
+  // previous is the previous value in the linked list
+  // we set it to NULL because we're not using it yet (initializing)
 
-  start = 0;
-  // start is the beginning of the range to delete
-
-  end = 0;
-  // end is the end of the range to delete
+  ll_float *current_value = list;
+  // current_value is the current value in the linked list
+  // we set it to the head of the linked list
+  // which returns as our final resulting linked list
  
-  while(list != NULL) {
+  while(current_value != NULL) {
     // while the list is not empty
 
-    if(list->value >= start && list -> value <= end) {
-      // if the value is within both start and end range
+    if(current_value-> value >= start && current_value -> value <= end) {
+      // if the current value is within the range
 
-      list = list -> next;
-      // move to the next value
+      if(previous == NULL) {
+        // if the previous value is NULL
+
+        list = current_value -> next;
+        // set the list to the next value
+
+      } else {
+        // if the previous value is not NULL
+
+        previous -> next = current_value -> next;
+        // set the next value of the previous value to the next value of the current value
+
+      }
+
+      ll_float *temp_value = current_value;
+      // temp_value is the current value
+
+      current_value = current_value -> next;
+      // set the current value to the next value
+
+      free(temp_value);
+      // free the memory of the current value
 
     } else {
-      // if the value is not within the range
+      // if the current value is not within the range
 
-      list = list -> next;
-      // move to the next value
-    }
-
-      list = list -> next;
-      // move to the next value
+      previous = current_value;
+      // set the previous value to the current value
 
     }
 
     return list;
-    // return the resulting linked list
+  }
 }

@@ -11,13 +11,24 @@ void bubble_sort_customers(ShoeCustomer *customers, size_t n_customers) {
   // You can use the compare_customers function to compare two customers.
   // You can use the get_n_purchases function to get the number of purchases of a customer.
   // You can use the get_name function to get the name of a customer.
+  
+  for(size_t i = 0; i < n_customers; i++) {
+  // increments through number of customers
 
-  customers = NULL;
-  // customers is an array of ShoeCustomer
-  // we set it to NULL because we're not using it yet (initializing)
+    for(size_t j = 0; j < n_customers - i - 1; j++) {
+    // increments through number of purchases a customer has
+    // subtracts i - 1 to avoid comparing the same ones
+    // we're comparing them to the next customer
 
-  n_customers = 0;
-  // n_customers is the number of customers
-  // we set it to 0 because we're not using it yet (initializing)
+      if(compare_customers(customers[j], customers[j + 1]) > 0) {
+      // if the comparison of the customers is greater than 0
+      // then we swap the customers
+      // this is because we want to sort them in ascending order
 
+        swap_customers(&customers[j], &customers[j + 1]);
+        // swap the customers
+
+      }
+    }
+  }
 }
