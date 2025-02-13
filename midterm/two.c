@@ -20,20 +20,20 @@ ll_float *delete_range(ll_float *list, float start, float end) {
   while(list != NULL) {
     // while the list is not empty
 
-    if(list->value >= start && list->value <= end) {
+    if(list->value >= start && list -> value <= end) {
       // if the value is within both start and end range
 
-      list = list->next;
+      list = list -> next;
       // move to the next value
 
     } else {
       // if the value is not within the range
 
-      list = list->next;
+      list = list -> next;
       // move to the next value
     }
 
-      list = list->next;
+      list = list -> next;
       // move to the next value
 
     }
