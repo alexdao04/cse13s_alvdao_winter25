@@ -4,6 +4,8 @@ long long *factorial_numbers(size_t n) {
   // You're going to have to allocate an array, fill it in, and return it.
   // The array should be of length n.
   // Recall the first few entries should be 1, 1, 2, 6, 24, 120...
+  // factorial is a function that takes a number in an array
+  // and returns the factorial of that number in the array
 
   long long *factorial = malloc(n * sizeof(long long)); 
   // allocate our memory for the array
@@ -12,7 +14,7 @@ long long *factorial_numbers(size_t n) {
   // when the array is NULL
 
     return NULL;
-    // return NULL because there's nothing there
+    // return NULL because theres no elements in the array
 
   }
 
