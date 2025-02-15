@@ -21,11 +21,11 @@ ll_text *append_text(ll_text *list, char *text) {
 
   }
 
-  element->text = strdup(text);
+  element -> text = strdup(text);
   // duplicate the input text and assign it to the element
   // this is the text we're going to add to the linked list
 
-  if (element->text == NULL) {
+  if (element -> text == NULL) {
   // if the element text is NULL
 
     free(element);
@@ -35,11 +35,31 @@ ll_text *append_text(ll_text *list, char *text) {
     // return NULL (again theres nothing to add)
   }
 
-  element->next = list;
+  element -> next = NULL;
   // the next element is the current list
 
-  return element;
-  // return the element
+  if(list == NULL) {
+  // if the list is NULL
+
+    return element;
+    // return the element
+  }
+
+  ll_text *current = list;
+  // initialize the current element to the list
+
+  while (current -> next != NULL) {
+  // iterate through the linked list until the last element
+
+    current = current -> next;
+    // move to the next element
+
+  }
+
+  current -> next = element;
+  // the next element of the current element is the element
+
+  return list;
 
 }
 
@@ -49,10 +69,10 @@ void save_to_file(ll_text *list, const char *filename) {
   FILE *outfile = fopen(filename, "w");
   // open the file for writing
 
-  for (ll_text *here = list; here; here = here->next) {
+  for (ll_text *here = list; here; here = here -> next) {
   // iterate through the linked list
 
-    fprintf(outfile, "%s\n", here->text);
+    fprintf(outfile, "%s\n", here -> text);
     // print the text of the current element to the file
 
   }
@@ -68,7 +88,7 @@ int ll_text_length(ll_text *list) {
   int text_length = 0;
   // initialize the text length to 0
 
-  for (ll_text *here = list; here; here = here->next) {
+  for (ll_text *here = list; here; here = here -> next) {
   // iterate through the linked list
 
     text_length++;
@@ -95,10 +115,10 @@ ll_text *insert_text(ll_text *list, char *text, int position) {
 
   }
 
-  new_element->text = strdup(text);
+  new_element -> text = strdup(text);
   // duplicate the input text and assign it to the new element
 
-  if (new_element->text == NULL) {
+  if (new_element -> text == NULL) {
   // if the new element text is NULL
 
     free(new_element);
@@ -106,23 +126,26 @@ ll_text *insert_text(ll_text *list, char *text, int position) {
 
     return NULL;
     // return NULL (again, theres nothing to add)
+
   }
+
   if (position == 0) {
   // if the position is 0
 
-    new_element->next = list;
+    new_element -> next = list;
     // the next element is the current list
 
     return new_element;
     // return the new element
   }
+
   ll_text *current = list;
   // initialize the current element to the list
 
   for (int i = 0; i < position - 1 && current != NULL; i++) {
   // iterate through the linked list until the position before the desired position
 
-    current = current->next;
+    current = current -> next;
     // move to the next element
 
   }
@@ -130,7 +153,7 @@ ll_text *insert_text(ll_text *list, char *text, int position) {
   if (current == NULL) {
   // if the current element is NULL
 
-    free(new_element->text);
+    free(new_element -> text);
     // free the new element text from memory
 
     free(new_element);
@@ -141,10 +164,10 @@ ll_text *insert_text(ll_text *list, char *text, int position) {
 
   }
 
-  new_element->next = current->next;
+  new_element -> next = current -> next;
   // the next element is the next element of the current element
 
-  current->next = new_element;
+  current -> next = new_element;
   // the next element of the current element is the new element
 
   return list;
@@ -162,13 +185,14 @@ ll_text *delete_text(ll_text *list, int position) {
     // return NULL (theres nothing there to delete)
 
   }
+
   if (position == 0) {
   // if the position is 0
 
-    ll_text *next = list->next;
+    ll_text *next = list -> next;
     // the next element is the next element of the list
 
-    free(list->text);
+    free(list -> text);
     // free the text of the list
 
     free(list);
@@ -182,27 +206,29 @@ ll_text *delete_text(ll_text *list, int position) {
   ll_text *current = list;
   // initialize the current element to the list
 
-  for (int i = 0; i < position - 1 && current->next != NULL; i++) {
+  for (int i = 0; i < position - 1 && current -> next != NULL; i++) {
   // iterate through the linked list until the position before the desired position
 
-    current = current->next;
+    current = current -> next;
     // move to the next element
 
   }
-  if (current->next == NULL) {
+
+  if (current -> next == NULL) {
   // if the next element of the current element is NULL
 
     return list;
     // return the list (theres nothing to delete)
 
   }
-  ll_text *to_delete = current->next;
+
+  ll_text *to_delete = current -> next;
   // the element to delete is the next element of the current element
 
-  current->next = to_delete->next;
+  current -> next = to_delete -> next;
   // the next element of the current element is the next element of the element to delete
 
-  free(to_delete->text);
+  free(to_delete -> text);
   // free the text of the element to delete from memory
 
   free(to_delete);
@@ -222,17 +248,18 @@ ll_text *replace_text(ll_text *list, char *text, int position) {
   for (int i = 0; i < position && current != NULL; i++) {
   // iterate through the linked list until the desired position
 
-    current = current->next;
+    current = current -> next;
     // move to the next element
 
   }
+
   if (current != NULL) {
   // if the current element is not NULL
 
-    free(current->text);
+    free(current -> text);
     // free the text of the current element
 
-    current->text = strdup(text);
+    current -> text = strdup(text);
     // duplicate the input text and assign it to the text of the current element
 
   }
@@ -252,22 +279,23 @@ ll_text *duplicate_ll_text(ll_text *list) {
     // return NULL (theres nothing to duplicate)
 
   }
+
   ll_text *new_list = NULL;
   // initialize the new list to NULL
 
   ll_text *tail = NULL;
   // initialize the tail to NULL
 
-  for (ll_text *current = list; current != NULL; current = current->next) {
+  for (ll_text *current = list; current != NULL; current = current -> next) {
   // iterate through the linked list
 
     ll_text *new_element = malloc(sizeof(ll_text));
     // allocate memory for the new element
 
-    new_element->text = strdup(current->text);
+    new_element -> text = strdup(current -> text);
     // duplicate the text of the current element and assign it to the new element
 
-    new_element->next = NULL;
+    new_element -> next = NULL;
     // the next element is NULL
 
     if (new_list == NULL) {
@@ -279,7 +307,7 @@ ll_text *duplicate_ll_text(ll_text *list) {
     } else {
     // if the new list is not NULL
 
-      tail->next = new_element;
+      tail -> next = new_element;
       // the next element of the tail is the new element
 
     }
@@ -321,7 +349,7 @@ ll_text_stack *load_from_file(const char *filename) {
 
   }
 
-  stack->lines = lines;
+  stack -> lines = lines;
   // the lines of the stack is the lines
 
   return stack;
@@ -335,7 +363,7 @@ ll_text_stack *new_stack_empty_text(void) {
   ll_text_stack *stack = calloc(1, sizeof(ll_text_stack));
   // allocate memory for the stack
 
-  stack->lines = NULL;
+  stack -> lines = NULL;
   // the lines of the stack is NULL
 
   return stack;
@@ -349,10 +377,10 @@ ll_text_stack *push_duplicate(ll_text_stack *stack) {
   ll_text_stack *new_stack = malloc(sizeof(ll_text_stack));
   // allocate memory for the new stack
 
-  new_stack->lines = duplicate_ll_text(stack->lines);
+  new_stack -> lines = duplicate_ll_text(stack -> lines);
   // the lines of the new stack is a duplicate of the lines of the current stack
 
-  new_stack->next = stack;
+  new_stack -> next = stack;
   // the lines of the new stack is a duplicate of the lines of the current stack
 
   return new_stack;
@@ -366,10 +394,10 @@ ll_text_stack *push_empty(ll_text_stack *stack) {
   ll_text_stack *new_stack = malloc(sizeof(ll_text_stack));
   // allocate memory for the new stack
 
-  new_stack->lines = NULL;
+  new_stack -> lines = NULL;
   // the lines of the new stack is NULL
 
-  new_stack->next = stack;
+  new_stack -> next = stack;
   // the next element of the new stack is the current stack
 
   return new_stack;
@@ -387,19 +415,20 @@ ll_text_stack *pop_stack(ll_text_stack *stack) {
     // return NULL (theres nothing to pop)
 
   }
-  ll_text_stack *next = stack->next;
+
+  ll_text_stack *next = stack -> next;
   // the next element is the next element of the stack
 
-  ll_text *lines = stack->lines;
+  ll_text *lines = stack -> lines;
   // the lines is the lines of the stack
 
   while (lines != NULL) {
   // iterate through the lines
 
-    ll_text *next_line = lines->next;
+    ll_text *next_line = lines -> next;
     // the next line is the next line of the lines
 
-    free(lines->text);
+    free(lines -> text);
     // free the text of the lines
 
     free(lines);
@@ -434,6 +463,7 @@ void chomp(char *s) {
 
       break;
       // break the loop, the newline character is removed
+      
     }
   }
 }
