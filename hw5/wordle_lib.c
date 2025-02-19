@@ -15,6 +15,7 @@
 //   5. (ie, at least 6 bytes long)
 bool score_guess(char *secret, char *guess, char *result) {
   // TODO(you): finish this function
+  // secret 
 
   UNUSED(secret);
   UNUSED(guess);
