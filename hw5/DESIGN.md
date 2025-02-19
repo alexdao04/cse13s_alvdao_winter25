@@ -6,13 +6,12 @@ For this assignment, we're going to be creating the famous word game "Wordle". A
 
 # "wordle_lib.c"
     // score_guess
-        This function
-
+        This function returns true when the guess we make is an exact match with the secret word in question. We return a value "result" which we could think of as the result of our guess. Perhaps we could just treat this as a bool "True".
     // valid_guess
-        This function
+        This function will return true when the guess we make matches some strings with the secret word. Oherwise it returns False (because why would it return True if the guess had no strings in common?). 
 
     // load_vocabulary
-        This function
+        This function returns an array of strings where each string has a 5-letter word. We will be dynamically allocating memory which would require us to use realloc().
 
     // free_vocabulary
-        This function 
+        This function frees all of the strings from the array (essentially, clearing the memory). It's the opposite of load_vocabulary so we would ideally just take that solution and reverse the steps.
