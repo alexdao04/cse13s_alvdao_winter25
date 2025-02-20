@@ -1,4 +1,8 @@
 #include "wordle_lib.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <regex.h>
 
 // Most of the code that you're going to have to implement goes in here.
 // Feel free to add more helper functions if necessary.
@@ -14,14 +18,19 @@
 //   You can assume that result points at enough memory for a string of length
 //   5. (ie, at least 6 bytes long)
 bool score_guess(char *secret, char *guess, char *result) {
-  // TODO(you): finish this function
-  // secret 
+  
+  // secret represents the word we are trying to guess
+  // guess tells us where our letters are (in)correct
+  // result represents the result of our guess
+    // this is what we're going to return
 
-  UNUSED(secret);
+  // TODO(you): finish this function
+
+  word = secret;
   UNUSED(guess);
   UNUSED(result);
 
-  return false;
+  return True;
 }
 
 // Returns true if the specified guess is one of the strings in the vocabulary,
@@ -29,7 +38,12 @@ bool score_guess(char *secret, char *guess, char *result) {
 // A simple linear scan over the strings in vocabulary is fine for our purposes,
 // but consider: could you do this search more quickly?
 bool valid_guess(char *guess, char **vocabulary, size_t num_words) {
+  
+  // guess tells us where our letters are (in)correct
+  // vocabulary is the list of words we can guess from
+  // num_words is the length of the vocabulary (and size_t is an unsigned int)
   // TODO(you): finish this function
+
   UNUSED(guess);
   UNUSED(vocabulary);
   UNUSED(num_words);
