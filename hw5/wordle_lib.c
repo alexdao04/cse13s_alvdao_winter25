@@ -17,20 +17,46 @@
 //   corresponding slot in the secret word.
 //   You can assume that result points at enough memory for a string of length
 //   5. (ie, at least 6 bytes long)
-bool score_guess(char *secret, char *guess, char *result) {
-  
+bool score_guess(char *secret, char *guess, char *result) {  
   // secret represents the word we are trying to guess
   // guess tells us where our letters are (in)correct
   // result represents the result of our guess
     // this is what we're going to return
 
-  // TODO(you): finish this function
+  for (int i = 0; i < 5; i++) {
+    // we iterate through the guess
 
-  word = secret;
-  UNUSED(guess);
-  UNUSED(result);
+    if (guess[i] == secret[i]) {
+      // if the guess is equal to the secret
 
-  return True;
+      result[i] = 'g';
+      // we set the result to 'g'
+
+    } else if (strchr(secret, guess[i]) != NULL) {
+      // if the guess is not equal to the secret
+
+      result[i] = 'y';
+      // we set the result to 'y'
+
+    } else {
+      // if the guess is not equal to the secret
+
+      result[i] = 'x';
+      // otherwise, we set the result to 'x'
+
+    }
+
+    guess++;
+    // we increment the guess
+
+  }
+
+  result[5] = '\0'; 
+  // result null to signify EOF
+
+  return strcmp(secret, guess) == 0;
+  // we return whether the guess is equal to the secret
+
 }
 
 // Returns true if the specified guess is one of the strings in the vocabulary,
@@ -42,14 +68,24 @@ bool valid_guess(char *guess, char **vocabulary, size_t num_words) {
   // guess tells us where our letters are (in)correct
   // vocabulary is the list of words we can guess from
   // num_words is the length of the vocabulary (and size_t is an unsigned int)
-  // TODO(you): finish this function
 
-  UNUSED(guess);
-  UNUSED(vocabulary);
-  UNUSED(num_words);
+  for(size_t i = 0; i < num_words; i++) {
+    // we iterate through the vocabulary
+
+    if(strcmp(guess, vocabulary[i]) == 0) {
+      // if the guess is in the vocabulary
+
+      return true;
+      // we return true
+
+    }
+  }
 
   return false;
+  // otherwise, we return false
+
 }
+
 
 // Returns an array of strings (so, char **), where each string contains a word
 // from the specified file. The file is assumed to contain 5-letter words, one
@@ -66,19 +102,39 @@ bool valid_guess(char *guess, char **vocabulary, size_t num_words) {
 // Each element of the array should be a single five-letter word,
 // null-terminated.
 char **load_vocabulary(char *filename, size_t *num_words) {
-  char **out = NULL;
-  // TODO(you): finish this function
 
-  UNUSED(filename);
-  UNUSED(num_words);
+  char **out = NULL;
+  // filename is going to be the file that we are reading from.
+  // num_words is going to be the number of words in the file
+  // we can determine this from the line count of the file
+  
+  for(filename; *filename != '\0'; filename++) {
+    // we iterate through the filename
+
+    if(*filename == '\n') {
+      // if the filename is a newline
+
+      *num_words += 1;
+      // we increment the number of words
+
+    }
+
+  }
 
   return out;
+  
 }
 
 // Free each of the strings in the vocabulary, as well as the pointer vocabulary
 // itself (which points to an array of char *).
 void free_vocabulary(char **vocabulary, size_t num_words) {
-  // TODO(you): finish this function
-  UNUSED(vocabulary);
-  UNUSED(num_words);
+
+  for(size_t i = 0; i < num_words; i++) {
+
+    free(vocabulary[i]);
+
+  }
+
+  free(vocabulary);    
+
 }
