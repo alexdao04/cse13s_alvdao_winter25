@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <regex.h>
 
 // Most of the code that you're going to have to implement goes in here.
 // Feel free to add more helper functions if necessary.
