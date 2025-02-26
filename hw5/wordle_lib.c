@@ -23,17 +23,17 @@ bool score_guess(char *secret, char *guess, char *result) {
 // result represents the result of our guess
 // this is what we're going to return
 
-    int secret_letters[26] = {0};
-    // this is the array that holds the letters in the secret word
-    // we chose 26 because there are 26 letters in the alphabet
+  int secret_letters[26] = {0};
+  // this is the array that holds the letters in the secret word
+  // we chose 26 because there are 26 letters in the alphabet
 
-    int guess_letters[26] = {0};
-    // this is the array that holds the letters in the guess word
-    // again, 26 letters in the alphabet
+  int guess_letters[26] = {0};
+  // this is the array that holds the letters in the guess word
+  // again, 26 letters in the alphabet
 
     for(int i = 0; i < 5; i++) {
-      // we check this array for 'g' and mark any 'x' in the guess (one by one)
-      // i < 5 since that's the amount of letters we have to check in wordle
+    // we check this array for 'g' and mark any 'x' in the guess (one by one)
+    // i < 5 since that's the amount of letters we have to check in wordle
 
       if(secret[i] == guess[i]) {
       // if the letter in the secret word matches
@@ -59,9 +59,9 @@ bool score_guess(char *secret, char *guess, char *result) {
     // we check again to mark any 'y' in the guess
 
       if(result[i] == 'x' && guess_letters[guess[i] - 'a'] < secret_letters[guess[i] - 'a']) {
-        // if the letter in the result is 'x' and the letter in the secret word is not 0
-        // this runs a comparison between the guessed letter and the secret letter
-        // we check if the letter in the guess word is less than the letter in the secret word
+      // if the letter in the result is 'x' and the letter in the secret word is not 0
+      // this runs a comparison between the guessed letter and the secret letter
+      // we check if the letter in the guess word is less than the letter in the secret word
 
         result[i] = 'y';
         // we set the result to be 'y'
@@ -80,7 +80,7 @@ bool score_guess(char *secret, char *guess, char *result) {
     return strcmp(secret, guess) == 0;
     // we return true 
     // if the secret word is equal to the guess word
-    
+
 }
 
 // Returns true if the specified guess is one of the strings in the vocabulary,
@@ -124,6 +124,7 @@ bool valid_guess(char *guess, char **vocabulary, size_t num_words) {
 // Each element of the array should be a single five-letter word,
 // null-terminated.
 char **load_vocabulary(char *filename, size_t *num_words) {
+// loads our list of words that we can guess from
 
   char **out = NULL;
   // set to null, this is what we're going to return
@@ -216,17 +217,17 @@ char **load_vocabulary(char *filename, size_t *num_words) {
 // Free each of the strings in the vocabulary, as well as the pointer vocabulary
 // itself (which points to an array of char *).
 void free_vocabulary(char **vocabulary, size_t num_words) {
-// vocabulary is the list of words we can guess from
-// num_words is the length of the vocabulary (and size_t is an unsigned int)
+// we're gonna free the strings i guess
 
   for(size_t i = 0; i < num_words; i++) {
     // we iterate through the vocabulary
 
     free(vocabulary[i]);
-    // and free the list of words
+    // this clears the elements in the representing array
 
   }
 
   free(vocabulary);
+  // this clears the leftover array, once the elements are cleared
 
 }
