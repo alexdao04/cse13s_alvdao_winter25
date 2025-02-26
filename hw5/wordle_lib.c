@@ -18,45 +18,68 @@
 //   You can assume that result points at enough memory for a string of length
 //   5. (ie, at least 6 bytes long)
 bool score_guess(char *secret, char *guess, char *result) {  
-  // secret represents the word we are trying to guess
-  // guess tells us where our letters are (in)correct
-  // result represents the result of our guess
-    // this is what we're going to return
+// secret represents the word we are trying to guess
+// guess tells us where our letters are (in)correct
+// result represents the result of our guess
+// this is what we're going to return
 
-  for (int i = 0; i < 5; i++) {
-    // we iterate through the guess
+    int secret_letters[26] = {0};
+    // this is the array that holds the letters in the secret word
+    // we chose 26 because there are 26 letters in the alphabet
 
-    if (guess[i] == secret[i]) {
-      // if the guess is equal to the secret
+    int guess_letters[26] = {0};
+    // this is the array that holds the letters in the guess word
+    // again, 26 letters in the alphabet
 
-      result[i] = 'g';
-      // we set the result to 'g'
+    for(int i = 0; i < 5; i++) {
+      // we check this array for 'g' and mark any 'x' in the guess (one by one)
+      // i < 5 since that's the amount of letters we have to check in wordle
 
-    } else if (strchr(secret, guess[i]) != NULL) {
-      // if the guess is not equal to the secret
+      if(secret[i] == guess[i]) {
+      // if the letter in the secret word matches
 
-      result[i] = 'y';
-      // we set the result to 'y'
+        result[i] = 'g';
+        // set the result to be 'g' (correct position, letter)
 
-    } else {
-      // if the guess is not equal to the secret
+      } else {
+        // no match?
 
-      result[i] = 'x';
-      // otherwise, we set the result to 'x'
+        result[i] = 'x';
+        // we set the result to be 'x'
 
+        secret_letters[secret[i] - 'a']++;
+        // this is the letter in the secret word
+        // we increment the letter in the secret word
+        // the reason we do this is because we are going to check for 'y' later
+
+      }
     }
 
-    guess++;
-    // we increment the guess
+    for(int i = 0; i < 5; i++) {
+    // we check again to mark any 'y' in the guess
 
-  }
+      if(result[i] == 'x' && guess_letters[guess[i] - 'a'] < secret_letters[guess[i] - 'a']) {
+        // if the letter in the result is 'x' and the letter in the secret word is not 0
+        // this runs a comparison between the guessed letter and the secret letter
+        // we check if the letter in the guess word is less than the letter in the secret word
 
-  result[5] = '\0'; 
-  // result null to signify EOF
+        result[i] = 'y';
+        // we set the result to be 'y'
+        // the letter is in the word but not in the correct position
 
-  return strcmp(secret, guess) == 0;
-  // we return whether the guess is equal to the secret
+        secret_letters[guess[i] - 'a']--;
+        // idea here is to decrement the letter in the secret word
+        // this should prevent unintentional double counting
 
+      }
+    }
+
+    result[5] = '\0';
+    // null terminator
+
+    return strcmp(secret, guess) == 0;
+    // we return true 
+    // if the secret word is equal to the guess word
 }
 
 // Returns true if the specified guess is one of the strings in the vocabulary,
@@ -64,16 +87,15 @@ bool score_guess(char *secret, char *guess, char *result) {
 // A simple linear scan over the strings in vocabulary is fine for our purposes,
 // but consider: could you do this search more quickly?
 bool valid_guess(char *guess, char **vocabulary, size_t num_words) {
-  
-  // guess tells us where our letters are (in)correct
-  // vocabulary is the list of words we can guess from
-  // num_words is the length of the vocabulary (and size_t is an unsigned int)
+// guess tells us where our letters are (in)correct
+// vocabulary is our list of words we can guess from
+// num_words is the length of our vocabulary list
 
   for(size_t i = 0; i < num_words; i++) {
-    // we iterate through the vocabulary
+  // we iterate through the vocabulary
 
     if(strcmp(guess, vocabulary[i]) == 0) {
-      // if the guess is in the vocabulary
+    // if the guess is in the vocabulary
 
       return true;
       // we return true
@@ -104,28 +126,30 @@ bool valid_guess(char *guess, char **vocabulary, size_t num_words) {
 char **load_vocabulary(char *filename, size_t *num_words) {
 
   char **out = NULL;
-  // set to null
+  // set to null, this is what we're going to return
+  // this is the list of words we're supposed to guess from
 
   *num_words = 0;
-  // out is the list of words we can guess from
+  // initialize with an initial value of 0
 
-  // filename is going to be the file that we are reading from.
-  // num_words is going to be the number of words in the file
-  // we can determine this from the line count of the file
   FILE *file = fopen(filename, "r");
-  // we open the file for reading
+  // opens the provided vocabulary file
 
   if(file == NULL) {
-    // if the file is NULL
+  // if the file is NULL
 
     return NULL;
     // we return NULL
+
   }
+
   char *line = NULL;
   // line is the line we are reading from
 
   size_t len = 0;
   // len is the length of the line
+  // we set this to 0 because we don't know the length of the line
+  // but we can initialize it for now and change it later
 
   ssize_t read;
   // read is the number of characters read
@@ -136,13 +160,13 @@ char **load_vocabulary(char *filename, size_t *num_words) {
     // we read the line from the file
 
     if (read == 6) {
-      // if the line is 6 characters long (we count the null too)
+      // if the line is 6 characters long (since we count the null too)
 
       out = realloc(out, (*num_words + 1) * sizeof(char *));
-      // we reallocate the memory for the list of words
+      // we reallocate heap memory for the list of words
 
       if(out == NULL) {
-        // if the list of words is NULL
+      // if the value of the list of words is NULL
 
         free(line);
         // we free the line
@@ -152,11 +176,12 @@ char **load_vocabulary(char *filename, size_t *num_words) {
 
         return NULL;
         // we return NULL
+
       }
 
       out[*num_words] = strndup(line, 5);
       // we set the list of words to be the line we read
-      
+
       if(out[*num_words] == NULL) {
         // if the list of words is NULL
 
@@ -168,6 +193,7 @@ char **load_vocabulary(char *filename, size_t *num_words) {
 
         return NULL;
         // we return NULL
+
       }
 
       (*num_words)++;
@@ -175,6 +201,7 @@ char **load_vocabulary(char *filename, size_t *num_words) {
 
     }
   }
+
   free(line);
   // we free the line
 
@@ -196,6 +223,7 @@ void free_vocabulary(char **vocabulary, size_t num_words) {
     // we iterate through the vocabulary
     free(vocabulary[i]);
     // and free the list of words
+
   }
 
   free(vocabulary);
