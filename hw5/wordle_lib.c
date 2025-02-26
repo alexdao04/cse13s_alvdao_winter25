@@ -159,7 +159,7 @@ char **load_vocabulary(char *filename, size_t *num_words) {
   while((read = getline(&line, &len, file)) != -1) {
     // we read the line from the file
 
-    if (read == 6) {
+    if(read == 6) {
       // if the line is 6 characters long (since we count the null too)
 
       out = realloc(out, (*num_words + 1) * sizeof(char *));
@@ -221,6 +221,7 @@ void free_vocabulary(char **vocabulary, size_t num_words) {
 
   for(size_t i = 0; i < num_words; i++) {
     // we iterate through the vocabulary
+
     free(vocabulary[i]);
     // and free the list of words
 
