@@ -104,37 +104,99 @@ bool valid_guess(char *guess, char **vocabulary, size_t num_words) {
 char **load_vocabulary(char *filename, size_t *num_words) {
 
   char **out = NULL;
+  // set to null
+
+  *num_words = 0;
+  // out is the list of words we can guess from
+
   // filename is going to be the file that we are reading from.
   // num_words is going to be the number of words in the file
   // we can determine this from the line count of the file
-  
-  for(filename; *filename != '\0'; filename++) {
-    // we iterate through the filename
+  FILE *file = fopen(filename, "r");
+  // we open the file for reading
 
-    if(*filename == '\n') {
-      // if the filename is a newline
+  if(file == NULL) {
+    // if the file is NULL
 
-      *num_words += 1;
+    return NULL;
+    // we return NULL
+  }
+  char *line = NULL;
+  // line is the line we are reading from
+
+  size_t len = 0;
+  // len is the length of the line
+
+  ssize_t read;
+  // read is the number of characters read
+  // we set this as a signed data type because:
+  // getline returns -1 when we reach EOF
+
+  while((read = getline(&line, &len, file)) != -1) {
+    // we read the line from the file
+
+    if (read == 6) {
+      // if the line is 6 characters long (we count the null too)
+
+      out = realloc(out, (*num_words + 1) * sizeof(char *));
+      // we reallocate the memory for the list of words
+
+      if(out == NULL) {
+        // if the list of words is NULL
+
+        free(line);
+        // we free the line
+
+        fclose(file);
+        // we close the file
+
+        return NULL;
+        // we return NULL
+      }
+
+      out[*num_words] = strndup(line, 5);
+      // we set the list of words to be the line we read
+      
+      if(out[*num_words] == NULL) {
+        // if the list of words is NULL
+
+        free(line);
+        // we free the line
+
+        fclose(file);
+        // we close the file
+
+        return NULL;
+        // we return NULL
+      }
+
+      (*num_words)++;
       // we increment the number of words
 
     }
-
   }
+  free(line);
+  // we free the line
+
+  fclose(file);
+  // and close the file.
 
   return out;
-  
+  // finally, conclude by returning out (our list of words)
+
 }
 
 // Free each of the strings in the vocabulary, as well as the pointer vocabulary
 // itself (which points to an array of char *).
 void free_vocabulary(char **vocabulary, size_t num_words) {
+  // vocabulary is the list of words we can guess from
+  // num_words is the length of the vocabulary (and size_t is an unsigned int)
 
   for(size_t i = 0; i < num_words; i++) {
-
+    // we iterate through the vocabulary
     free(vocabulary[i]);
-
+    // and free the list of words
   }
 
-  free(vocabulary);    
-
+  free(vocabulary);
 }
