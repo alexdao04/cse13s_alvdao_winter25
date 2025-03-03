@@ -30,8 +30,13 @@ Set anything that doesn't match our filters to NULL and then tally everything el
 The next challenge we're going to have here is writing our test cases. This is the first time that we're doing this in our class, so this might be a little finicky the first time.
 
 We want to write cases for the following functions:
+score_letter, 
+score_word, 
+filter_vocabulary_green, 
+filter_vocabulary_yellow, 
+and filter_vocabulary_gray. 
 
-score_letter, score_word, filter_vocabulary_green, filter_vocabulary_yellow, and  filter_vocabulary_gray. Also, maybe free_vocabulary to make sure we're actually handling that correctly.
+Also, maybe free_vocabulary to make sure we're actually handling that correctly.
 
 # score_letter:
 If we have a base case where we know that there's a certain amount of words that contain the letter "s" in our vocabulary, and particularly in a certain position, we'll know how many words should appear in there. This might be simplifiable with a bit of regex and some Ctrl+F, but if we return different values from what we calculated through our base case, something's for sure wrong with my implementation.
