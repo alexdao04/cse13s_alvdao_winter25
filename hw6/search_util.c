@@ -13,25 +13,29 @@ int score_letter(char letter, char **vocabulary, size_t num_words) {
   // vocabulary tells us where the words are 
   // num_words tells us how many words are in the vocabulary
 
-  for(letter => 'a'; letter <= 'z'; letter++) {
+  int score = 0;
+  // initialize score  
 
-    for(int i = 0; i < num_words; i++) {
+  for(size_t i = 0; i < num_words; i++) {
+    // for each word in the vocabulary
 
-      if(vocabulary[i] == NULL) {
-        return 0;
+    if(vocabulary[i] == NULL) {
+      return 0;
+      // if the word is null, skip to the next word and return 0
+    }
 
-      else if(vocabulary[i][j] == letter) {
+    for(int j = 0; j < 6; j++) {
+      // for each letter in the word
+      if (vocabulary[i][j] == letter) {
         score++;
-          return score;
-
+        break;
+        // if the letter is in the word, increment the score and break
         }
       }
     }
+    return score;
   }
-
-  return score;
-
-}
+      
 
 // Calculate the score for a given word, where the letter_scores array has
 // already been filled out for you and is guaranteed to be of length 26. Slot 0
@@ -41,18 +45,28 @@ int score_letter(char letter, char **vocabulary, size_t num_words) {
 // score once.
 int score_word(char *word, int *letter_scores) {
 
-  for(char *word = 0);
+  int score = 0;
+  // initialize score to track the score of the word
 
-    for(int i = 0; i < 26; i++) {
+  for(int i = 0; i < 6; i++) {
+    // for each letter in the word
 
-      if(word[i] == letter) {
+    if(word[i] == '\0') {
+      return score;
+      // if the word is null, return the score
 
-        score += letter_scores[i];
-          return score;
-      }
     }
 
+    if(word[i] >= 'a' && word[i] <= 'z') {
+      score += letter_scores[word[i] - 'a'];
+      // if the word is in the alphabet, increment the score
+      // subtracting 'a' from the word gives us the index of the letter in the alphabet
+
+    }
+  }
+
   return score;
+  // return the score of the word
 
 }
 
@@ -63,19 +77,19 @@ int score_word(char *word, int *letter_scores) {
 char *get_guess(char **vocabulary, size_t num_words) {
   int letter_scores[26];
 
-  for (int i = 0; i < 26; i++) {
+  for(int i = 0; i < 26; i++) {
     letter_scores[i] = score_letter('a' + i, vocabulary, num_words);
   }
 
   char *best_guess = NULL;
   int best_score = 0;
   int score = 0;
-  for (size_t i = 0; i < num_words; i++) {
+  for(size_t i = 0; i < num_words; i++) {
     if (vocabulary[i] == NULL) {
       continue;
     }
     score = score_word(vocabulary[i], letter_scores);
-    if (score > best_score) {
+    if(score > best_score) {
       best_guess = vocabulary[i];
       best_score = score;
     }
@@ -88,14 +102,45 @@ char *get_guess(char **vocabulary, size_t num_words) {
 // in the vocabulary that do contain that letter, free their pointers and set
 // the corresponding slot to NULL.
 // Returns the number of words that have been filtered from the vocabulary.
+
 size_t filter_vocabulary_gray(char letter, char **vocabulary,
                               size_t num_words) {
 
-  // TODO(you): implement this function!
-  UNUSED(letter);
-  UNUSED(vocabulary);
-  UNUSED(num_words);
-  return 0;
+  size_t gray_filter = 0;
+  
+  for(size_t i = 0; i < num_words; i++) {
+     // for each word in the vocabulary
+
+      if(vocabulary[i] == NULL) {
+        continue;
+        // if the word is null, continue to the next word
+
+      }
+
+      for(int j = 0; j < 6; j++) {
+        // for each letter in the word
+
+        if(vocabulary[i][j] == letter) {
+          // if the letter is in the word
+
+          free(vocabulary[i]);
+          // free the vocabulary pointer
+
+          vocabulary[i] = NULL;
+          // set the pointer to NULL to track which letter goes to which slot in the word
+
+          gray_filter++;
+          // increment the gray_filter counter (tells us how many words have been filtered)
+
+          break;
+          // break out of the loop
+
+      }
+    }
+  }
+
+  return gray_filter;
+
 }
 
 // This function will filter down the vocabulary based on the knowledge that the
@@ -105,12 +150,49 @@ size_t filter_vocabulary_gray(char letter, char **vocabulary,
 // Returns the number of words that have been filtered from the vocabulary.
 size_t filter_vocabulary_yellow(char letter, int position, char **vocabulary,
                                 size_t num_words) {
-  // TODO(you): implement this function!
-  UNUSED(letter);
-  UNUSED(position);
-  UNUSED(vocabulary);
-  UNUSED(num_words);
-  return 0;
+  
+size_t yellow_filter = 0;
+
+  for(size_t i = 0; i < num_words; i++) {
+      // for each word in the vocabulary (index using i)
+
+      if(vocabulary[i] == NULL) {
+        continue;
+        // if the word is null, return 0
+        // this is how we know that the word has been filtered
+
+      }
+
+      bool yellow_filter = false;
+      // initialize the yellow_filter to 0 (false)
+  
+      for(int j = 0; j < 6; j++) {
+        // for each letter in the word
+        // use 0 to initialize j
+
+        if(vocabulary[i][j] == letter) {
+          yellow_filter = true;
+          // if the letter is in the word, set the yellow_filter to true
+          // this is how we know that the word has been filtered
+
+        break;
+        // break out of the loop
+           
+      }
+
+      if(!yellow_filter || vocabulary[i][position] == letter) {
+        free(vocabulary[i]);
+        vocabulary[i] = NULL;
+        // if the letter is in the word or the letter is at the position
+        // free the pointer and set it to NULL
+        // this is how we track which letter goes to which slot in the word
+
+      }
+    }
+  }
+
+  return yellow_filter;
+
 }
 
 // This function will filter down the vocabulary based on the knowledge that the
@@ -119,19 +201,52 @@ size_t filter_vocabulary_yellow(char letter, int position, char **vocabulary,
 // Returns the number of words that have been filtered from the vocabulary.
 size_t filter_vocabulary_green(char letter, int position, char **vocabulary,
                                size_t num_words) {
-  // TODO(you): implement this function!
-  UNUSED(letter);
-  UNUSED(position);
-  UNUSED(vocabulary);
-  UNUSED(num_words);
-  return 0;
+
+  size_t green_filter = 0;
+
+  for(size_t i = 0; i < num_words; i++) {
+    // for each word in the vocabulary
+
+    if(vocabulary[i] == NULL) {
+      return 0;
+      // if the word is null, return 0
+      // this is how we know that the word has been filtered
+
+      }
+
+    for(int j = 0; j < 6; j++) {
+      // for each letter in the word
+
+      if(vocabulary[i][position] != letter) {
+        free(vocabulary[i]);
+        vocabulary[i] = NULL;
+        green_filter++;
+          // if the letter is in the word 
+          // free the pointer and set it to NULL
+          // position is the index of the letter in the word
+          // this is how we track which letter goes to which slot in the word
+
+      }
+    }
+  } 
+
+  return green_filter;
+  // return the number of words that have been filtered
+   
 }
 
 // Free each of the strings in the vocabulary, as well as the pointer vocabulary
 // itself (which points to an array of char *).
 void free_vocabulary(char **vocabulary, size_t num_words) {
+
   for (size_t i = 0; i < num_words; i++) {
+
     free(vocabulary[i]);
+    // clear the vocabulary array
+
   }
+
   free(vocabulary);
+  // clear the pointer that held the array
+
 }
