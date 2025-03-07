@@ -193,7 +193,7 @@ size_t yellow_filter = 0;
 
       }
 
-      bool yellow_filter = false;
+      bool yellow_filter = {false};
       // initialize the yellow_filter to 0 (false)
   
       for(int j = 0; j < 5; j++) {
@@ -209,6 +209,7 @@ size_t yellow_filter = 0;
 
         break;
         // break out of the loop
+        
         }
       }
 

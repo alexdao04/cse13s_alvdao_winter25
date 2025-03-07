@@ -166,7 +166,6 @@ All of the code you need to finish is in `search_util.c`.
 
 For this homework, we are allocating some dynamic data structures, with
 `malloc`, `calloc`, and `realloc`.
-
 Most of the work has been done for you already, but you need to make sure that
 we have a plan for `free`-ing all the memory we allocate. Which parts of the
 code will allocate? How can you make sure every allocated pointer gets `free`d?
