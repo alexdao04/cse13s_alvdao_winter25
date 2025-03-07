@@ -134,8 +134,10 @@ size_t filter_vocabulary_gray(char letter, char **vocabulary,
      // for each word in the vocabulary
 
       if(vocabulary[i] == NULL) {
+        // if the word is null
+
         continue;
-        // if the word is null, continue to the next word
+        // continue to the next word
 
       }
 
@@ -184,8 +186,9 @@ size_t yellow_filter = 0;
       // for each word in the vocabulary (index using i)
 
       if(vocabulary[i] == NULL) {
+        // if the word is null, move along
+
         continue;
-        // if the word is null, return 0
         // this is how we know that the word has been filtered
 
       }
