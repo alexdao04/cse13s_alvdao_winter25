@@ -114,57 +114,57 @@ if(score_letter('c', vocabulary, num_words) != 2) {
 // filter_vocabulary_green testing
 init_vocabulary(vocabulary, words, num_words);
 
-if(filter_vocabulary_green('a', 0, vocabulary, num_words) != 0) {
-  printf("Test failed: filter_vocabulary_green('a', 0, vocabulary, num_words) != 0\n");
-  printf("Result is: %zu\n", filter_vocabulary_green('a', 0, vocabulary, num_words));
+if(filter_vocabulary_green('s', 1, vocabulary, num_words) != 3) {
+  printf("Test failed: filter_vocabulary_green('s', 1, vocabulary, num_words) != 3\n");
+  printf("Result is: %zu\n", filter_vocabulary_green('a', 1, vocabulary, num_words));
 
-} else if(filter_vocabulary_green('a', 0, vocabulary, num_words) == 0) {
-  printf("Test passed: filter_vocabulary_green('a', 0, vocabulary, num_words) == 0\n");
-
-}
-
-init_vocabulary(vocabulary, words, num_words);
-
-if(filter_vocabulary_green('b', 1, vocabulary, num_words) != 1) {
-  printf("Test failed: filter_vocabulary_green('b', 1, vocabulary, num_words) != 1\n");
-  printf("Result is: %zu\n", filter_vocabulary_green('b', 1, vocabulary, num_words));
-
-} else if(filter_vocabulary_green('b', 1, vocabulary, num_words) == 1) {
-  printf("Test passed: filter_vocabulary_green('b', 1, vocabulary, num_words) == 1\n");
+} else if(filter_vocabulary_green('s', 1, vocabulary, num_words) == 3) {
+  printf("Test passed: filter_vocabulary_green('s', 1, vocabulary, num_words) == 3\n");
 
 }
 
 init_vocabulary(vocabulary, words, num_words);
 
-if(filter_vocabulary_green('b', 2, vocabulary, num_words) != 5) {
-  printf("Test failed: filter_vocabulary_green('c', 2, vocabulary, num_words) != 5\n");
+if(filter_vocabulary_green('a', 2, vocabulary, num_words) != 2) {
+  printf("Test failed: filter_vocabulary_green('a', 2, vocabulary, num_words) != 2\n");
   printf("Result is: %zu\n", filter_vocabulary_green('b', 2, vocabulary, num_words));
 
-} else if(filter_vocabulary_green('b', 2, vocabulary, num_words) == 5) {
-  printf("Test passed: filter_vocabulary_green('c', 2, vocabulary, num_words) == 5\n");
+} else if(filter_vocabulary_green('a', 2, vocabulary, num_words) == 2) {
+  printf("Test passed: filter_vocabulary_green('a', 2, vocabulary, num_words) == 2\n");
+
+}
+
+init_vocabulary(vocabulary, words, num_words);
+
+if(filter_vocabulary_green('t', 3, vocabulary, num_words) != 4) {
+  printf("Test failed: filter_vocabulary_green('t', 3, vocabulary, num_words) != 4\n");
+  printf("Result is: %zu\n", filter_vocabulary_green('t', 3, vocabulary, num_words));
+
+} else if(filter_vocabulary_green('t', 3, vocabulary, num_words) == 4) {
+  printf("Test passed: filter_vocabulary_green('t', 3, vocabulary, num_words) == 4\n");
 
 }
 
 // filter_vocabulary_yellow testing
 init_vocabulary(vocabulary, words, num_words);
 
-if(filter_vocabulary_yellow('a', 0, vocabulary, num_words) != 6) {
-  printf("Test failed: filter_vocabulary_yellow('a', 0, vocabulary, num_words) != 6\n");
+if(filter_vocabulary_yellow('a', 0, vocabulary, num_words) != 7) {
+  printf("Test failed: filter_vocabulary_yellow('a', 0, vocabulary, num_words) != 7\n");
   printf("Result is: %zu\n", filter_vocabulary_yellow('a', 0, vocabulary, num_words));
 
-} else if(filter_vocabulary_yellow('a', 0, vocabulary, num_words) == 6) {
-  printf("Test passed: filter_vocabulary_yellow('a', 0, vocabulary, num_words) == 6\n");
+} else if(filter_vocabulary_yellow('a', 0, vocabulary, num_words) == 7) {
+  printf("Test passed: filter_vocabulary_yellow('a', 0, vocabulary, num_words) == 7\n");
 
 }
 
 init_vocabulary(vocabulary, words, num_words);
 
-if(filter_vocabulary_yellow('b', 0, vocabulary, num_words) != 5) {
-  printf("Test failed: filter_vocabulary_yellow('b', 0, vocabulary, num_words) != 5\n");
+if(filter_vocabulary_yellow('b', 0, vocabulary, num_words) != 0) {
+  printf("Test failed: filter_vocabulary_yellow('b', 0, vocabulary, num_words) != 0\n");
   printf("Result is: %zu\n", filter_vocabulary_yellow('b', 0, vocabulary, num_words));
 
-} else if(filter_vocabulary_yellow('b', 0, vocabulary, num_words) == 5) {
-  printf("Test passed: filter_vocabulary_yellow('b', 0, vocabulary, num_words) == 5\n");
+} else if(filter_vocabulary_yellow('b', 0, vocabulary, num_words) == 0) {
+  printf("Test passed: filter_vocabulary_yellow('b', 0, vocabulary, num_words) == 0\n");
 
 }
 
@@ -182,12 +182,12 @@ if(filter_vocabulary_yellow('c', 0, vocabulary, num_words) != 2) {
 // filter_vocabulary_gray testing
 init_vocabulary(vocabulary, words, num_words);
 
-if(filter_vocabulary_gray('a', vocabulary, num_words) != 4) {
-  printf("Test failed: filter_vocabulary_gray('a', vocabulary, num_words) != 4\n");
+if(filter_vocabulary_gray('a', vocabulary, num_words) != 3) {
+  printf("Test failed: filter_vocabulary_gray('a', vocabulary, num_words) != 3\n");
   printf("Result is: %zu\n", filter_vocabulary_gray('a', vocabulary, num_words));
 
-} else if(filter_vocabulary_gray('a', vocabulary, num_words) == 4) {
-  printf("Test passed: filter_vocabulary_gray('a', vocabulary, num_words) == 4\n");
+} else if(filter_vocabulary_gray('a', vocabulary, num_words) == 3) {
+  printf("Test passed: filter_vocabulary_gray('a', vocabulary, num_words) == 3\n");
 
 }
 
@@ -204,12 +204,12 @@ if(filter_vocabulary_gray('b', vocabulary, num_words) != 9) {
 
 init_vocabulary(vocabulary, words, num_words);
 
-if(filter_vocabulary_gray('c', vocabulary, num_words) != 9) {
-  printf("Test failed: filter_vocabulary_gray('c', vocabulary, num_words) != 9\n");
+if(filter_vocabulary_gray('c', vocabulary, num_words) != 8) {
+  printf("Test failed: filter_vocabulary_gray('c', vocabulary, num_words) != 8\n");
   printf("Result is: %zu\n", filter_vocabulary_gray('c', vocabulary, num_words));
 
-} else if(filter_vocabulary_gray('c', vocabulary, num_words) == 9) {
-  printf("Test passed: filter_vocabulary_gray('c', vocabulary, num_words) == 9\n");
+} else if(filter_vocabulary_gray('c', vocabulary, num_words) == 8) {
+  printf("Test passed: filter_vocabulary_gray('c', vocabulary, num_words) == 8\n");
 
 }
 

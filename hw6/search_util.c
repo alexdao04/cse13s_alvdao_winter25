@@ -161,7 +161,7 @@ size_t filter_vocabulary_gray(char letter, char **vocabulary,
     }
 
     if(!has_letter) {
-      // if the letter is not in the word
+      // if the letter is not in the word (at all)
 
       gray_filter++;
       // increment the gray_filter counter
@@ -208,14 +208,14 @@ size_t yellow_filter = 0;
       }
 
       bool has_letter = false;
-      // initialize the yellow_filter to 0 (false)
+      // initialize has_letter to 0 (false)
   
       for(int j = 0; j < 5; j++) {
         // for each letter in the word
         // use 0 to initialize j
 
         if(vocabulary[i][j] == letter && j != position) {
-          // if the letter is in the word
+          // if the letter is in the word (but not the right position)
 
           has_letter = true;
           // set the yellow_filter to true
@@ -228,7 +228,7 @@ size_t yellow_filter = 0;
       }
 
       if(has_letter) {
-        // if the letter is not in the word or the letter is at the position
+        // if the letter is in the word but not the correct position
 
         yellow_filter++;
         // increment the yellow_filter counter
@@ -258,50 +258,36 @@ size_t yellow_filter = 0;
 size_t filter_vocabulary_green(char letter, int position, char **vocabulary,
                                size_t num_words) {
 
-  size_t green_filter = 0;
-  // initialize counter for # of words filtered 
-  // that matched the letter at the position
-
+  size_t green_matches = 0;
+  // initialize counter for # of words filtered that match the letter position
+  
   for(size_t i = 0; i < num_words; i++) {
     // for each word in the vocabulary
 
-    if(vocabulary[i] == NULL) {
-      // if the word is null, move along
+    if(vocabulary[i] != NULL) {
+      printf("Checking: %s at position %d\n", vocabulary[i], position);
+      // if the word is not null, print the word and the position
+      
+      if(position < (int)strlen(vocabulary[i]) && 
+         vocabulary[i][position] == letter) {
+      // if the position is less than the length of the word
+      // and the letter at the position is the same as the letter we are looking for
+      // this is how we know that the letter is in the word
+      // and the letter is in the correct position
 
-      continue;
-      // this is how we know that the word has been filtered
-
-      }
-
-      if(vocabulary[i][position] == letter) {
-        // if the letter is not in the word
-
-        green_filter++;
-        // increment the green_filter counter
-        // this tells us how many words have been filtered
-
-      } else {
-        // if the letter is at the position
-
-        free(vocabulary[i]);
-        // free the pointer
-
-        vocabulary[i] = NULL;
-        // set the pointer to NULL
-        // this is how we track which letter goes to which slot in the word
-      }
+      green_matches++;
+      // increment the green_matches counter
     }
-
-  return green_filter;
-  // return the number of words that have been filtered
-   
+  }
 }
+  return green_matches;
+                               }
 
 // Free each of the strings in the vocabulary, as well as the pointer vocabulary
 // itself (which points to an array of char *).
 void free_vocabulary(char **vocabulary, size_t num_words) {
 
-  for (size_t i = 0; i < num_words; i++) {
+  for(size_t i = 0; i < num_words; i++) {
 
     free(vocabulary[i]);
     // clear the vocabulary array
