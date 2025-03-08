@@ -20,6 +20,7 @@ int score_letter(char letter, char **vocabulary, size_t num_words) {
     if(vocabulary[i] == NULL) {
       continue;
       // if the word is null, skip to the next word and return 0
+
     }
 
     for(int j = 0; j < 5; j++) {
@@ -33,10 +34,13 @@ int score_letter(char letter, char **vocabulary, size_t num_words) {
 
         break;
         // if the letter is in the word, increment the score and break
+
         }
       }
     }
+
     return letter_score;
+
   }
       
 
@@ -82,6 +86,7 @@ int score_word(char *word, int *letter_scores) {
         letters_seen[index] = true;
         // if the letter has not been seen, increment the score
         // set the letter to true
+        
       }
     }
   }
@@ -210,7 +215,7 @@ size_t yellow_filter = 0;
       bool has_letter = false;
       // initialize has_letter to 0 (false)
   
-      for(int j = 0; j < 5; j++) {
+      for(int j = 1; j < 5; j++) {
         // for each letter in the word
         // use 0 to initialize j
 
@@ -265,23 +270,23 @@ size_t filter_vocabulary_green(char letter, int position, char **vocabulary,
     // for each word in the vocabulary
 
     if(vocabulary[i] != NULL) {
-      printf("Checking: %s at position %d\n", vocabulary[i], position);
-      // if the word is not null, print the word and the position
-      
-      if(position < (int)strlen(vocabulary[i]) && 
-         vocabulary[i][position] == letter) {
-      // if the position is less than the length of the word
-      // and the letter at the position is the same as the letter we are looking for
-      // this is how we know that the letter is in the word
-      // and the letter is in the correct position
+      // if the word is not null
+      // this is how we know that the word has been filtered correctly
+
+      if(vocabulary[i][position] == letter) {
+        // if the letter is in the word at the correct position
 
       green_matches++;
       // increment the green_matches counter
+
     }
   }
 }
+
   return green_matches;
-                               }
+  // return the number of words that have been filtered
+
+}
 
 // Free each of the strings in the vocabulary, as well as the pointer vocabulary
 // itself (which points to an array of char *).
