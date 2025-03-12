@@ -13,14 +13,19 @@ Where our customer database is located. Contains customer info such as email add
 Should read customers.tsv and store all the customers in a hash table. Will have the following functions:
 - add:
     - Prompts the user for their personal information. Stores this in a hash table. We'll need to use malloc functions to store this info.
+        - 
 - lookup:
     - Prompt user for email address, find that entry in the hash table. Find the info of that customer and display the information about them.
+        - 
 - delete:
     - Prompt user for email address, find that entry in the hash table. Deletes user info if found, and throws a generic error message (e.g. "there's no matching email address") if no matches are found.
+        - Could be handled similarly to the quit function; only thing is, we don't break the loop afterward and continue on. Clear the entry though, instead of clearing the memory
 - list:
     - List every user in the database, in order.
+        - 
 - save:
     - Writes the current state (stored to memory) of the database to customers.tsv
+        - 
 - quit:
     - Clears stored memory and exits program.
         - Should be self-explanatory. free(), implement with a break loop or something of the sort. 
