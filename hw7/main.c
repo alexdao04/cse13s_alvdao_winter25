@@ -5,63 +5,74 @@
 typedef struct customer {
     char *name;
     char *email;
-    char *phone;
+    char *food;
+
 } customer;
 
 typedef struct database {
-    size_t userid;
-    size_t database;
-    size_t contents;
-    customer *database_contents;
+    int userid;
+    char database;
+    char contents;
+    customer *database_storage; 
+    // pointer to storage for database
+
 } database;
 
-database *database_table(size_t userid) {
-    // initialize the database table
+database *database_table(int userid, char database) {
+    // initialize our database table
 
-    database *database_table = malloc(sizeof(database));
-    // allocate memory for the database
+    struct database *dbase;
+    dbase = malloc(sizeof(database));
+    // allocate memory for the database itself
 
-    database *database_contents = malloc(sizeof(database) * userid);
-    // allocate memory for the contents
+    dbase -> database_storage = malloc(sizeof(customer) * userid);
+    // allocate memory for the contents (separately)
 
-    database_table = database_contents;
-    // assign contents to database
-
-    write(database_table, database_contents);
-    // write contents to database
-    
+    return dbase;
 }
 
-
-int(add)(char *name, char *email, char *phone); {
+int add(char *name, char *email, char *food, int userid) {
 // add a customer to the database (basic I/O operations)
 
     printf("Enter the name of the customer: ");
 
     scanf("%s", name);
 
+    // allocate memory for name
+
     printf("Enter the email of the customer: ");
 
     scanf("%s", email);
 
-    printf("Enter the phone number of the customer: ");
+    // allocate memory for email
 
-    scanf("%ld", phone);
-    // after this we take this data and write it to the database
+    printf("Enter the customer's favorite food: ");
 
-    for(size_t i = 0; i < userid; i++) {
+    scanf("%s", food);
 
-        malloc(customer);
+    // allocate memory for phone
+    // after this we scan the database for the customer
+    // if the customer is not found, we add them to the database
 
-        malloc(database);
 
+    for(int i = 0; i < userid; i++) {
+        if(email != NULL) {
 
+            return 0; 
+            // email not found thus customer not found.
+            // set to 0 (false)
+        }
+    
+        else {
+
+            return 1;
+            // email found thus customer found.
+            // set to 1 (true)
+        }
     }
+}
 
-
-    }
-
-int(lookup)(char *name, char *email, char *phone) {
+int lookup(database *dbase, char *name, char *email, char *food, int userid) {
 // looks up a specific customer in the database (in this case by email)
 
     printf("Enter the email of the customer: ");
@@ -70,27 +81,34 @@ int(lookup)(char *name, char *email, char *phone) {
 
     // after this we scan the database for the customer
 
-    for(email = 0; email < userid; email++) {
+    for(int i = 0; i < userid; i++) {
         // for each element found in userid column 
         // since we want to look up a customer
         // we need to search the hash table
 
-        if(email != NULL) {
-            // if the email is not found
-            // then we return 0
-            return 0;
+        if(strcmp(email, dbase -> database_storage[i].email) == 0) {
+
+            printf("Customer found: %s, %s, %s\n", dbase->database_storage[i].name, 
+                dbase->database_storage[i].email, dbase->database_storage[i].food);
+            // happens if the email is found
         }
+
         else {
-            // if the email is found
-            // then we return 1
-            return 1;
+
+            printf("Customer not found\n");
+            // happens if the email is not found
+
+            return 0;
+
         }
+        
 
 
 
     }
+}
 
-int(delete)(char *name, char *email, char *phone) {
+int delete(database *dbase, char *name, char *email, char *food, int userid) {
     // delete a customer from the database
     // thoughts; maybe we could start with some i/o operations (from customers.tsv)
     // prompt then search hash table
@@ -100,62 +118,117 @@ int(delete)(char *name, char *email, char *phone) {
     scanf("%s", email);
 
     // this is the part where we scan the database for the customer email
+    if(strcmp(email, dbase->database_storage[userid].email) == 0) {
 
+        printf("Customer found: %s, %s, %s\n", dbase->database_storage[userid].name, 
+            dbase->database_storage[userid].email, dbase->database_storage[userid].food);
+        // happens if the email is found
+
+        printf("Would you like to delete this customer? (y/n)\n");
+
+        char answer;
+
+        scanf("%c", &answer);
+
+        if(answer == 'y') {
+            free(dbase -> database_storage[userid].name);
+            free(dbase -> database_storage[userid].email);
+            free(dbase -> database_storage[userid].food);
+
+            printf("Customer deleted\n");
+
+         } else {
+            printf("Invalid: Customer not found\n");
+            // happens if the email is not found
+
+            return 0;
+
+            }
+        }
     }
 
 
-int(list)(void) {
+int list(database *dbase, char *email, int userid) {
     // list all customers in the database
     // thoughts; maybe we could start with some i/o operations (from customers.tsv)
-    // prompt then search hash table
-    // then write to file
+    // prompt: would you like to list all customers? (y/n)
+
+    printf("Would you like to list all customers? (y/n)\n");
+        char answer;
+        scanf("%c", &answer);
+
+        if(answer == 'y') {
+            for(size_t i = 0; i < userid; i++) {
+
+                printf("Customer %zu: %s, %s, %s\n", i, dbase->database_storage[i].name, 
+                    dbase->database_storage[i].email, dbase->database_storage[i].food);
+                // for each element found in userid column
+                // print the customer information
+            }
+
+        if(answer == 'n') {
+            printf("Exiting program\n");
+
+            }
+        }
+    }
 
 
+int save(database *dbase, char file[], int userid) {
 
+    printf("Do you want to save to customers.tsv?\n");
+    char answer;
+    scanf("%c", &answer);
+
+    if(answer == 'y') {
+        FILE *file = fopen("customers.tsv", "w");
+        // open the file for writing
+
+        if(file == NULL) {
+            printf("Error opening file\n");
+            // if the file cannot be opened
+
+        }
+        else {
+
+            for(size_t i = 0; i < userid; i++) {
+                fprintf(file, "%s\t%s\t%s", dbase->database_storage[i].name, 
+                    dbase->database_storage[i].email, dbase->database_storage[i].food);
+                // output gets printed to the file
+
+                printf("Save successful\n");
+                // if the file is successfully written to:
+
+                fclose(file);
+                // close the file
+
+            }
+        }
+    }
+
+    if(answer == 'n') {
+
+        printf("Exiting program\n");
+
+    }
 }
 
-int(save)(void) {
+int quit(database *dbase, int userid) {
 
-    for(email = 0; email < userid; email++) {
+    printf("Would you like to exit the program?")
+    // to be continued here..
+
+    for (int i = 0; i < userid; i++) {
         // for each element found in userid column
 
-        malloc(database);
-        // allocate memory for database
-
-        malloc(contents);
-        // allocate memory for contents
-
-        database = contents;
-        // assign contents to database
-
-        strdup(database, contents);
-        // duplicate contents to database
-
-        write(database, contents);
+        free(dbase -> database_storage[i].name);
+        free(dbase -> database_storage[i].email);
+        free(dbase -> database_storage[i].food);
 
     }
-}
 
-int(quit)(void) {
-    
-    for(size_t i = 0; i < userid); i++ {
+    free(dbase -> database_storage);
+    free(dbase);
 
-        free(database);
-        // free memory for database
 
-        free(contents);
-        // free memory for contents
-
-        database = NULL;
-        // assign NULL to database
-
-        contents = NULL;
-        // assign NULL to contents
-
-        return 0;
-        // return nothing since we cleared the entry
-
-        break;
-
-    }
 }

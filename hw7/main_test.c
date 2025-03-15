@@ -3,26 +3,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void init_database(char database, char contents, size_t userid)
+int main() {
+    // create a database
+    database *db = database_table(1);
+    // add a customer to the database
+    add(db, "John Doe", "6503903823", "");
+}
 
-    for(size_t i = 0; i < userid; i++) {
-        // for each element found in userid column
-        // add to database
-        // then write to file
-
-        malloc(database);
-        // allocate memory for database
-
-        malloc(contents);
-        // allocate memory for contents
-
-        database = contents;
-        // assign contents to database
-
-        write(database, contents);
-        // write contents to database
-        
-    }
 
 // ok lets think about how we could implement tests for each function
 // we could start by testing the add function
