@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+// linear search go brr
+
 typedef struct customer {
     char *name;
     char *email;
@@ -18,57 +20,136 @@ typedef struct database {
 
 } database;
 
+database *dbase;
+
 database *database_table(int userid, char database) {
     // initialize our database table
 
-    struct database *dbase;
-    dbase = malloc(sizeof(database));
-    // allocate memory for the database itself
+    dbase =  malloc(sizeof(database));
+    // allocate memory for the database table
 
+    if(dbase == NULL) {
+        return NULL;
+        // if the memory allocation fails
+        // return NULL
+    }
+
+    dbase -> userid = userid;
+    // set the userid to the number of customers in the database
+    dbase -> database = database;
+    // set the database to the database table
+    dbase -> contents = 0;
+    // set the contents to the database table
     dbase -> database_storage = malloc(sizeof(customer) * userid);
     // allocate memory for the contents (separately)
+
+    if(dbase -> database_storage == NULL) {
+        free(dbase);
+        return NULL;
+        // again, we return a NULL
+        // if we don't allocate memory correctly
+    }
 
     return dbase;
 }
 
-int add(char *name, char *email, char *food, int userid) {
+int add(database *dbase, char *name, char *email, char *food, int userid) {
 // add a customer to the database (basic I/O operations)
 
-    printf("Enter the name of the customer: ");
+    printf("Enter the email of the customer: \n");
+    fgets(email, 100, stdin);
+    email[strlen(email) - 1] = '\0';
 
-    scanf("%s", name);
+    printf("Enter the name of the customer: \n");
+    fgets(name, 100, stdin);
+    name[strlen(name) - 1] = '\0';
 
-    // allocate memory for name
-
-    printf("Enter the email of the customer: ");
-
-    scanf("%s", email);
-
-    // allocate memory for email
-
-    printf("Enter the customer's favorite food: ");
-
-    scanf("%s", food);
+    printf("Enter the customer's favorite food: \n");
+    fgets(food, 100, stdin);
+    food[strlen(food) - 1] = '\0';
+    // use fgets to read the food from the user
+    // we remove the newline character from the food
+    // use strlen to get the length of the food
+    // then subtract 1 to remove the newline character
 
     // allocate memory for phone
     // after this we scan the database for the customer
     // if the customer is not found, we add them to the database
 
-
     for(int i = 0; i < userid; i++) {
-        if(email != NULL) {
+        // for each element found in userid
+        if(dbase -> database_storage[i].email != NULL &&
+            strcmp(email, dbase -> database_storage[i].email) == 0) {
+            // if the email is in the database
+            printf("Customer already exists\n");
+            printf("Customer found: %s, %s, %s\n", dbase->database_storage[i].name, 
+                dbase->database_storage[i].email, dbase->database_storage[i].food);
+            // we print the customer info
+            printf("Would you like to update this customer's information? (y/n)\n");
+            // prompt user to update customer info
+            // if y then we update, n we exit instead
+            char answer;
+            scanf("%c", &answer);
+            // we scan the answer from the user
+
+            if(answer == 'y') {
+                // if the user wants to update the customer info
+                dbase -> database_storage[i].name = malloc(strlen(name) + 1);
+                strcpy(dbase -> database_storage[i].name, name);
+
+                dbase -> database_storage[i].email = malloc(strlen(email) + 1);
+                strcpy(dbase -> database_storage[i].email, email);
+
+                dbase -> database_storage[i].food = malloc(strlen(food) + 1);
+                strcpy(dbase -> database_storage[i].food, food);
+                // basically, we're allocating memory for each field
+                // + 1 byte for a null terminator. marks where to stop indexing
+
+                printf("Customer updated\n");
+                return 1;
+
+            } else {
+                printf("Exiting...\n");
+            }
 
             return 0; 
             // email not found thus customer not found.
             // set to 0 (false)
         }
-    
-        else {
+    }
 
-            return 1;
-            // email found thus customer found.
-            // set to 1 (true)
-        }
+    printf("Customer does not exist\n");
+    printf("Would you like to add this customer? (y/n)\n");
+
+    char answer;
+    scanf("%c", &answer);
+
+    if(answer == 'y') {
+        // if the customer is not found
+        // we add them to the database
+
+        dbase -> database_storage[userid].name = malloc(strlen(name) + 1);
+        strcpy(dbase -> database_storage[userid].name, name);
+
+        dbase -> database_storage[userid].email = malloc(strlen(email) + 1);
+        strcpy(dbase -> database_storage[userid].email, email);
+
+        dbase -> database_storage[userid].food = malloc(strlen(food) + 1);
+        strcpy(dbase -> database_storage[userid].food, food);
+
+        // basically, we're allocating memory for each field
+        // + 1 byte for a null terminator. marks where to stop indexing
+
+        printf("Customer added\n");
+        return 1;
+        // we return 1 since the email is there
+
+    } else {
+        printf("Invalid: Customer not found\n");
+        // happens if the email is not found
+        return 0;
+        // we return 0 (false)
+
     }
 }
 
@@ -76,7 +157,6 @@ int lookup(database *dbase, char *name, char *email, char *food, int userid) {
 // looks up a specific customer in the database (in this case by email)
 
     printf("Enter the email of the customer: ");
-
     scanf("%s", email);
 
     // after this we scan the database for the customer
@@ -86,26 +166,22 @@ int lookup(database *dbase, char *name, char *email, char *food, int userid) {
         // since we want to look up a customer
         // we need to search the hash table
 
-        if(strcmp(email, dbase -> database_storage[i].email) == 0) {
+        if(dbase -> database_storage[i].email != NULL && 
+            strcmp(email, dbase -> database_storage[i].email) == 0) {
+            // if the email is in the database
 
             printf("Customer found: %s, %s, %s\n", dbase->database_storage[i].name, 
                 dbase->database_storage[i].email, dbase->database_storage[i].food);
-            // happens if the email is found
+            // we print the customer info
+
+            return 1;
+            // we return 1 since the email is there
         }
-
-        else {
-
-            printf("Customer not found\n");
-            // happens if the email is not found
-
-            return 0;
-
-        }
-        
-
-
-
     }
+            printf("Customer not found in the database\n");
+            // this happens if the email isn't in our database
+            return 0;
+            // we return 0 (false)
 }
 
 int delete(database *dbase, char *name, char *email, char *food, int userid) {
@@ -118,34 +194,60 @@ int delete(database *dbase, char *name, char *email, char *food, int userid) {
     scanf("%s", email);
 
     // this is the part where we scan the database for the customer email
-    if(strcmp(email, dbase->database_storage[userid].email) == 0) {
+    for (int i = 0; i < userid; i++) {
+        // for each element found in userid column
+        if (dbase->database_storage[i].email != NULL && 
+            strcmp(email, dbase->database_storage[i].email) == 0) {
+            // if the email is in the database
 
-        printf("Customer found: %s, %s, %s\n", dbase->database_storage[userid].name, 
-            dbase->database_storage[userid].email, dbase->database_storage[userid].food);
-        // happens if the email is found
+            printf("Customer found: %s, %s, %s\n", dbase->database_storage[i].name, 
+                dbase->database_storage[i].email, dbase->database_storage[i].food);
+                // we print the customer info 
 
-        printf("Would you like to delete this customer? (y/n)\n");
+            printf("Would you like to delete this customer? (y/n)\n");
+                // prompt user to delete customer info
+                // if y then we delete, n we exit instead
 
-        char answer;
+            char answer;
+            scanf(" %c", &answer);
+            // check the answer, y or n?
 
-        scanf("%c", &answer);
+            if(answer == 'y') {
+                free(dbase->database_storage[i].name);
+                free(dbase->database_storage[i].email);
+                free(dbase->database_storage[i].food);
+                // free memory for the following fields
 
-        if(answer == 'y') {
-            free(dbase -> database_storage[userid].name);
-            free(dbase -> database_storage[userid].email);
-            free(dbase -> database_storage[userid].food);
+                dbase->database_storage[i].name = NULL;
+                dbase->database_storage[i].email = NULL;
+                dbase->database_storage[i].food = NULL;
+                // set them to NULL after we free them
 
-            printf("Customer deleted\n");
+                printf("Customer deleted\n");
+                return 1;
+                // self explanatory
+            }
+        
+            if(answer == 'n') {
+                printf("Customer not deleted\n");
+                return 0;
 
-         } else {
-            printf("Invalid: Customer not found\n");
-            // happens if the email is not found
+                printf("Exiting...\n");
+                // if the user inputs n
+                // we exit instead
 
-            return 0;
+            } else {
+                printf("Customer not found\n");
+                // if the email is not in the database
+                return 0;
+                // if the user inputs n
 
             }
         }
     }
+}
+
+
 
 
 int list(database *dbase, char *email, int userid) {
@@ -167,10 +269,15 @@ int list(database *dbase, char *email, int userid) {
             }
 
         if(answer == 'n') {
-            printf("Exiting program\n");
+            printf("Exiting...\n");
 
             }
         }
+
+        return 0;
+        // since the email isn't there
+        // it can't be listed
+
     }
 
 
@@ -196,39 +303,135 @@ int save(database *dbase, char file[], int userid) {
                     dbase->database_storage[i].email, dbase->database_storage[i].food);
                 // output gets printed to the file
 
+                fclose(file);
+                // close the file
+
                 printf("Save successful\n");
                 // if the file is successfully written to:
 
-                fclose(file);
-                // close the file
 
             }
         }
     }
+                if(answer == 'n') {
 
-    if(answer == 'n') {
-
-        printf("Exiting program\n");
+                printf("Exiting...\n");
 
     }
+
+    return 0;
+    // since the email isn't there
+    // it can't be saved
+
 }
 
 int quit(database *dbase, int userid) {
 
-    printf("Would you like to exit the program?")
-    // to be continued here..
-
-    for (int i = 0; i < userid; i++) {
+    printf("Would you like to exit the program?");
+    char answer;
+    scanf("%c", &answer);
+    
+    if(answer == 'y') {
+        for(int i = 0; i < userid; i++) {
         // for each element found in userid column
 
-        free(dbase -> database_storage[i].name);
-        free(dbase -> database_storage[i].email);
-        free(dbase -> database_storage[i].food);
+            free(dbase -> database_storage[i].name);
+            // free our memory allocated for the following fields:
+            free(dbase -> database_storage[i].email);
+            // name, email, food
+            free(dbase -> database_storage[i].food);
+            // clear the memory allocated from earlier...
+
+        }
+
+                free(dbase -> database_storage);
+                // free the memory allocated for the database storage
+                free(dbase);
+                // free the memory allocated for the database table
+                printf("Database cleared, exiting...\n");
+                // prints a success message to the user
+                return 0; // true
 
     }
 
-    free(dbase -> database_storage);
-    free(dbase);
+    if (answer == 'n') {
+        printf("Return to main menu\n");
+        return 1; // false
+        
+    }
+}
 
+int main() {
+    database *dbase;
+    dbase = database_table(100, 'a');
+
+    if(dbase == NULL) {
+        printf("Error: database_table has nothing in it\n");
+        // if the database table is empty (NULL)
+        // we return an error message
+        return 1;
+        
+    }
+
+    char name[100];
+    char email[100];
+    char food[100];
+    // we have up to 100 customers in the database
+    // hence indexed by 0-99 in an array
+
+    int userid = 100;
+    // we have up to 100 customers in the database
+    // which we can identify by their userid
+
+    while(1) {
+        printf("What would you like to do? (add, lookup, delete, list, save, quit)\n");
+        // prompt user to choose an action
+        char selection[6];
+        // we have 6 actions to choose from
+        scanf("%s", selection);
+        // we scan the action from the user
+        // then use a switch statement 
+        // to create our menu with separate functions
+
+        if(strcmp(selection, "add") == 0) {
+            add(dbase, name, email, food, userid);
+            // if the user chooses to add a customer
+            // we call the add function
+
+        } else if(strcmp(selection, "lookup") == 0) {
+            lookup(dbase, name, email, food, userid);
+            // if the user chooses to look up a customer
+            // we call the lookup function
+
+        } else if(strcmp(selection, "delete") == 0) {
+            delete(dbase, name, email, food, userid);
+            // if the user chooses to delete a customer
+            // we call the delete function
+
+        } else if(strcmp(selection, "list") == 0) {
+            list(dbase, email, userid);
+            // if the user chooses to list all customers
+            // we call the list function
+
+        } else if(strcmp(selection, "save") == 0) {
+            save(dbase, "customers.tsv", userid);
+            // if the user chooses to save the database
+            // we call the save function
+
+        } else if(strcmp(selection, "quit") == 0) {
+            quit(dbase, userid);
+            // if the user chooses to quit
+            // we call the quit function
+
+        } else {
+            printf("Invalid selection\n");
+            // if the user chooses an invalid action
+            // print a generic error message
+            // and return to the main menu
+
+        }
+    }
+
+    return 0;
 
 }
