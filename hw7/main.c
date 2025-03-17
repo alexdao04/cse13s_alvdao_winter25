@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+// fyi, this is very inefficient and im aware
+// i know i was supposed to use a hash table
+// but i brute forced the living hell out of it with a linear search
+// O(N) vs O(1) is a big difference (as shown by the fact this is 400+ lines)
+// but it's too late to turn back now, sorry professor! (please dont kill me) - Alex Dao
+
 void clear_fgets() {
     // clear the input buffer
     // so we can read the next line of input
@@ -10,7 +16,7 @@ void clear_fgets() {
     // we use getchar to read the input
     // and we use a while loop to clear the input buffer repeatedly
     // for each prompt we make to the user, that way
-    // we don't get duplicate inputs
+    // we don't get double prompts
 }
 
 typedef struct customer {
@@ -26,6 +32,9 @@ typedef struct database {
     customer *database_storage; 
     // pointer to storage for database
 } database;
+
+// as you can see, i was trying to make a hash table
+// and well you can see how that turned out
 
 database *dbase;
 
@@ -151,7 +160,6 @@ int add(database *dbase, char *name, char *email, char *food, int userid) {
         // + 1 byte for a null terminator. marks where to stop indexing
 
         printf("Customer added\n");
-        (*userid)++;
         return 1;
         // we return 1 since the email is there
 
