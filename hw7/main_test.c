@@ -1,82 +1,97 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "main.h" // Include the header file where the functions and types are declared
+#include "main.h" 
 
 void main_testing(void) {
     database *dbase = database_table(100);
     // initialize the database table
     
     if (dbase == NULL) {
-        printf("Error: database_table is empty\n");
+        printf("Failed: database_table is empty\n");
         // if the database table is empty (NULL)
         // we return an error message
         return;
-
     }
 
     // first we test the add function
 
-    int result;
-    if ((result = add(dbase, "", "", "")) != 0) {
-        printf("Test failed: add(dbase, \"\") != 0\n");
-        printf("Result is: %d\n", result);
+    int result = add(dbase, "John Doe", "johndoe@gmail.com", "Pizza", 2);
+    // we add a customer to the database
+
+    if(result == 1) {
+        printf("Pass: Customer added successfully\n");
+        // if the customer was added successfully
+        // we print a success message
     } else {
-        printf("Test passed: add(dbase, \"\") == 0\n");
-        printf("Result is: %d\n", result);
+        printf("Failed: Customer not added\n");
+        printf("Result: %d\n", result);
+        // if the customer was not added
+        // we print an error message
     }
 
-    if ((result = add(dbase, "johndoe@gmail.com", "John Doe", "Sushi")) != 0) {
-        printf("Test failed: add(dbase, \"johndoe@gmail.com\", \"John Doe\", \"Sushi\") != 0\n");
-        printf("Result is: %d\n", result);
+    // now we test the lookup function
+
+    result = lookup(dbase, "johndoe@gmail.com");
+    // we look up the customer in the database
+
+    if(result == 1) {
+        printf("Pass: Customer found\n");
+        printf("Customer name: %s\n", dbase->database_storage[0].name);
+        // if the customer was found
+        // we print a success message
     } else {
-        printf("Test passed: add(dbase, \"johndoe@gmail.com\", \"John Doe\", \"Sushi\") == 0\n");
-        printf("Result is: %d\n", result);
+        printf("Failed: Customer not found\n");
+        printf("Result: %d\n", result);
+        // if the customer was not found
+        // we print an error message
     }
 
-    // then the lookup function
-    if ((result = lookup(dbase, "")) != 0) {
-        printf("Test failed: lookup(dbase, \"\") != 0\n");
-        printf("Result is: %d\n", result);
+    // now we test the delete function
+
+    result = delete(dbase, "johndoe@gmail.com");
+    // we delete the customer from the database
+
+    if(result == 1) {
+        printf("Pass: Customer deleted\n");
+        // if the customer was deleted
+        // we print a success message
     } else {
-        printf("Test passed: lookup(dbase, \"\") == 0\n");
-        printf("Result is: %d\n", result);
+        printf("Failed: Customer not deleted\n");
+        printf("Result: %d\n", result);
+        // if the customer was not deleted
+        // we print an error message
     }
 
-    if ((result = lookup(dbase, "johndoe@gmail.com")) != 0) {
-        printf("Test failed: lookup(dbase, \"johndoe@gmail.com\") != 0\n");
-        printf("Result is: %d\n", result);
+    // now we test the list function
+
+    result = list(dbase, "");
+    // we list all customers in the database
+
+    if(result == 1) {
+        printf("Pass: Customers listed\n");
+        // if the customers were listed
+        // we print a success message
     } else {
-        printf("Test passed: lookup(dbase, \"johndoe@gmail.com\") == 0\n");
-        printf("Result is: %d\n", result);
+        printf("Failed: Customers not listed\n");
+        printf("Result: %d\n", result);
+        // if the customers were not listed
+        // we print an error message
     }
 
-    // then we test the delete function
-    if ((result = delete(dbase, "")) != 0) {
-        printf("Test failed: delete(dbase, \"\") != 0\n");
-        printf("Result is: %d\n", result);
-    } else {
-        printf("Test passed: delete(dbase, \"\") == 0\n");
-        printf("Result is: %d\n", result);
-    }
+    // now we test the save function
 
-    // then we could test the list function by listing all customers in the database
-    if ((result = list(dbase, "")) != 0) {
-        printf("Test failed: list(dbase, \"\") != 0\n");
-        printf("Result is: %d\n", result);
+    result = save(dbase, "customers.txt");
+    // we save the database to a file
+    
+    if(result == 1) {
+        printf("Pass: Database saved\n");
+        // if the database was saved
+        // we print a success message
     } else {
-        printf("Test passed: list(dbase, \"\") == 0\n");
-        printf("Result is: %d\n", result);
-    }
-
-    // then we could test the save function by saving the database to a file
-    if ((result = save(dbase, "dbase.txt")) != 0) {
-        printf("Test failed: save(dbase, \"dbase.txt\") != 0\n");
-        printf("Result is: %d\n", result);
-    } else {
-        printf("Test passed: save(dbase, \"dbase.txt\") == 0\n");
-        printf("Result is: %d\n", result);
+        printf("Failed: Database not saved\n");
+        printf("Result: %d\n", result);
+        // if the database was not saved
+        // we print an error message
     }
 }
-
-// and well... you dont need to test the quit function
