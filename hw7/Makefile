@@ -1,6 +1,8 @@
 CC = clang
 CFLAGS = -Wall -Wpedantic -Werror -Wextra
 
+# makefile from hw6 was used as a reference for this makefile.
+
 all: main_test main
 
 main: main.o
