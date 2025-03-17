@@ -4,7 +4,7 @@
 # Date: 2025-03-10
 
 # Description: 
-This program creates a customer database using a dictionary and allows the user to add, update, delete, search, and list customers. Ideally should be done using a hashtable.
+This program creates a customer database using a dictionary and allows the user to add, update, delete, search, and list customers. Ideally should be done using a hashtable for O(1) efficiency.
 
 # customers.tsv:
 Where our customer database is located. Contains customer info such as email address, display name, shoe size, favorite food.
