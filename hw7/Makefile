@@ -1,6 +1,6 @@
 CC = clang
 CFLAGS = -Wall -g -std=c11
-TARGET = dbase
+TARGET = main
 TEST_TARGET = main_test
 SOURCES = main.c
 TEST_SOURCES = main_test.c main.c

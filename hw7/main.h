@@ -15,7 +15,7 @@ typedef struct database {
 
 database *database_table(size_t userid);
 
-int add(database *db, char *name, char *email, char *phone); {
+int add(database *db, char *name, char *email, char *phone) {
 
 }
 
