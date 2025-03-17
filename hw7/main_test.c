@@ -22,12 +22,21 @@ int main(void) {
     char name[10];
     char email[10];
     char food[10];
+    char supported_commands[10];
     // we have 10 customers in the database
     // indexed by 0-9 (10 values)
     // each customer has a name, email, and food
 
     // ok lets think about how we could implement tests for each function
     // we could start by testing the add function
+    
+    while(1) {
+        printf("What would you like to do? (add, lookup, delete, list, save, quit)\n");
+        scanf("%s", supported_commands);
+        // prompt user to choose an action
+        // we have 6 actions to choose from
+        }
+    }
 
     if(add(dbase,"") != 0) {
         printf("Test failed: add(dbase, \"\") != 0\n");
