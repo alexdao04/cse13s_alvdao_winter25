@@ -1,31 +1,22 @@
 CC = clang
-CFLAGS = -Wall -Wpedantic -Werror -Wextra -g # standard flags from previous Makefiles + -g for debugging
-TARGET = main
-TEST_TARGET = main_test
-SOURCES = main.c
-TEST_SOURCES = main_test.c main.c
-OBJECTS = $(SOURCES:.c=.o)
-TEST_OBJECTS = $(TEST_SOURCES:.c=.o)
-HEADERS = main.h
+CFLAGS = -Wall -Wpedantic -Werror -Wextra
 
-all: $(TARGET) $(TEST_TARGET)
+all: main_test main
 
-$(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET)
+main: main.o
+	$(CC) main.o -o main
 
-$(TEST_TARGET): $(TEST_OBJECTS)
-	$(CC) $(CFLAGS) $(TEST_OBJECTS) -o $(TEST_TARGET)
+main_test: main.o main_test.o
+	$(CC) main.o main_test.o -o main_test
 
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+main_test.o: main_test.c
+	$(CC) $(CFLAGS) -c main_test.c
+
+main.o: main.c
+	$(CC) $(CFLAGS) -c main.quit
 
 clean:
-	rm -f $(OBJECTS) $(TEST_OBJECTS) $(TARGET) $(TEST_TARGET) 
+	rm -f main.o main_test.o main main_test
 
-run: $(TARGET)
-	./$(TARGET)
-
-test: $(TEST_TARGET)
-	./$(TEST_TARGET)
-
-.PHONY: all clean run test
+format:
+	clang-format -i -style=file *.[ch]
