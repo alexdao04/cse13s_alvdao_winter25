@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "main.h" 
+#include "main.h"
 
 void main_testing(void) {
     database *dbase = database_table(100);
@@ -16,7 +16,7 @@ void main_testing(void) {
 
     // first we test the add function
 
-    int result = add(dbase, "John Doe", "johndoe@gmail.com", "Pizza", 2);
+    int result = add(dbase, "John Doe", "johndoe@gmail.com", "Pizza", 100);
     // we add a customer to the database
 
     if(result == 1) {
@@ -42,6 +42,7 @@ void main_testing(void) {
         // we print a success message
     } else {
         printf("Failed: Customer not found\n");
+        printf("Result: %d\n", result);
         // if the customer was not found
         // we print an error message
     }
@@ -57,6 +58,7 @@ void main_testing(void) {
         // we print a success message
     } else {
         printf("Failed: Customer not deleted\n");
+        printf("Result: %d\n", result);
         // if the customer was not deleted
         // we print an error message
     }
@@ -68,18 +70,18 @@ void main_testing(void) {
 
     if(result == 1) {
         printf("Pass: Customers listed\n");
-        printf("Customers: %d\n", dbase->contents);
         // if the customers were listed
         // we print a success message
     } else {
         printf("Failed: Customers not listed\n");
+        printf("Result: %d\n", result);
         // if the customers were not listed
         // we print an error message
     }
 
     // now we test the save function
 
-    result = save(dbase, "customers.tsv");
+    result = save(dbase, "customers.txt");
     // we save the database to a file
     
     if(result == 1) {

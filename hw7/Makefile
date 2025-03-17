@@ -1,5 +1,5 @@
 CC = clang
-CFLAGS = -Wall -g -std=c11
+CFLAGS = -Wall -Wpedantic -Werror -Wextra -g # standard flags from previous Makefiles + -g for debugging
 TARGET = main
 TEST_TARGET = main_test
 SOURCES = main.c
@@ -11,16 +11,16 @@ HEADERS = main.h
 all: $(TARGET) $(TEST_TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $(TARGET)
+	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET)
 
 $(TEST_TARGET): $(TEST_OBJECTS)
-	$(CC) $(TEST_OBJECTS) -o $(TEST_TARGET)
+	$(CC) $(CFLAGS) $(TEST_OBJECTS) -o $(TEST_TARGET)
 
-%.o: %.c 
+%.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJECTS) $(TEST_OBJECTS) $(TARGET) $(TEST_TARGET)
+	rm -f $(OBJECTS) $(TEST_OBJECTS) $(TARGET) $(TEST_TARGET) 
 
 run: $(TARGET)
 	./$(TARGET)

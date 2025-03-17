@@ -8,7 +8,7 @@
 // O(N) vs O(1) is a big difference (as shown by the fact this is 400+ lines)
 // but it's too late to turn back now, sorry professor! (please dont kill me) - Alex Dao
 
-void clear_fgets() {
+void clear_fgets(void) {
     // clear the input buffer
     // so we can read the next line of input
     int selection;
@@ -377,7 +377,7 @@ int quit(database *dbase) {
 }
 
 // backbone of the program
-int main() {
+int main(void) {
     database *dbase = database_table(100);
 
     if (dbase == NULL) {
@@ -392,7 +392,7 @@ int main() {
     char food[100];
     // we have up to 100 customers in the database
 
-    while (1) {
+    while (1) { // while loop, runs our main menu
         printf("What would you like to do? (add, lookup, delete, list, save, quit)\n");
         // prompt user to choose an action
         char selection[6];
