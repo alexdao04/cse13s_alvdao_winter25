@@ -15,7 +15,7 @@ main_test.o: main_test.c
 	$(CC) $(CFLAGS) -c main_test.c
 
 main.o: main.c
-	$(CC) $(CFLAGS) -c main.quit
+	$(CC) $(CFLAGS) -c main.c
 
 clean:
 	rm -f main.o main_test.o main main_test
