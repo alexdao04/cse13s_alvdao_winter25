@@ -42,7 +42,6 @@ void main_testing(void) {
         // we print a success message
     } else {
         printf("Failed: Customer not found\n");
-        printf("Result: %d\n", result);
         // if the customer was not found
         // we print an error message
     }
@@ -58,7 +57,6 @@ void main_testing(void) {
         // we print a success message
     } else {
         printf("Failed: Customer not deleted\n");
-        printf("Result: %d\n", result);
         // if the customer was not deleted
         // we print an error message
     }
@@ -70,18 +68,18 @@ void main_testing(void) {
 
     if(result == 1) {
         printf("Pass: Customers listed\n");
+        printf("Customers: %d\n", dbase->contents);
         // if the customers were listed
         // we print a success message
     } else {
         printf("Failed: Customers not listed\n");
-        printf("Result: %d\n", result);
         // if the customers were not listed
         // we print an error message
     }
 
     // now we test the save function
 
-    result = save(dbase, "customers.txt");
+    result = save(dbase, "customers.tsv");
     // we save the database to a file
     
     if(result == 1) {
