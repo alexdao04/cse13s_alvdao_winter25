@@ -1,7 +1,7 @@
 # Homework #7: Customer Database
-# Author: Alexander Dao
-# Class: CSE 13S, Prof. Rudnick
-# Date: 2025-03-10
+Author: Alexander Dao
+Class: CSE 13S, Prof. Rudnick
+Date: 2025-03-10
 
 # Description: 
 This program creates a customer database using a dictionary and allows the user to add, update, delete, search, and list customers. Ideally should've been done using a hashtable for O(1) efficiency, but I ended up doing a O(N) implementation with linear search.
@@ -9,7 +9,7 @@ This program creates a customer database using a dictionary and allows the user 
 # customers.tsv:
 Where our customer database is located. Contains customer info such as email address, display name, shoe size, favorite food.
 
-# main.c (nain interaction loop):
+# main.c (main interaction loop):
 Should read customers.tsv and store all the customers in a hash table. Will have the following functions:
 - add:
     - Prompts the user for their personal information. Stores this in a hash table. We'll need to use malloc functions to store this info. This can be handled with basic I/O operations (printf(), scanf()).
