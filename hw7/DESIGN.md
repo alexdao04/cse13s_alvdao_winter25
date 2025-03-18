@@ -41,3 +41,12 @@ Should read customers.tsv and store all the customers in a hash table. Will have
     - The backbone that makes up everything here. Defines all the functions that I have in my code and also is the reason why my save function actually saves to "customers.tsv".
     - Uses a while loop for the main menu: we prompt 6 actions (add, lookup, delete, list, save, quit). We scan the user's input like we do with all the other functions and then direct them to the proper action they selected.
 
+# main_test.c
+It should have tested the program, but for some reason my makefile (regardless of whether it's main or main_test) only runs the main program and not the test program.
+
+# MAKEFILE
+Was mostly based on the makefile from hw6, adapted for the customer database. Has similar flags for testing purposes as well. This is the part where I had a little bit of trouble, to be honest.
+- Wall: gives us warnings for bad practice in our code
+- Wpedantic: enforces C standard rules
+- Werror: All warnings will be treated as errors
+- Wextra: extra warning messages that Wall doesn't cover
