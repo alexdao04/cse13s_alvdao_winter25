@@ -4,7 +4,7 @@
 # Date: 2025-03-10
 
 # Description: 
-This program creates a customer database using a dictionary and allows the user to add, update, delete, search, and list customers. Ideally should've be done using a hashtable for O(1) efficiency, but I ended up doing a O(N) implementation with linear search.
+This program creates a customer database using a dictionary and allows the user to add, update, delete, search, and list customers. Ideally should've been done using a hashtable for O(1) efficiency, but I ended up doing a O(N) implementation with linear search.
 
 # customers.tsv:
 Where our customer database is located. Contains customer info such as email address, display name, shoe size, favorite food.
