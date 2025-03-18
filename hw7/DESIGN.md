@@ -43,6 +43,7 @@ Should read customers.tsv and store all the customers in a hash table. Will have
 
 # main_test.c
 It should have tested the program, but for some reason my makefile (regardless of whether it's main or main_test) only runs the main program and not the test program.
+This test file is also pretty scuffed I'm going to admit. A lot of it is boilerplate code too (in particular the print statements for testing and showing results)
 
 # MAKEFILE
 Was mostly based on the makefile from hw6, adapted for the customer database. Has similar flags for testing purposes as well. This is the part where I had a little bit of trouble, to be honest.
