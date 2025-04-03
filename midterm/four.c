@@ -1,9 +1,36 @@
 #include "midterm.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-// Function declarations
-int compare_customers(ShoeCustomer a, ShoeCustomer b);
-void swap_customers(ShoeCustomer *a, ShoeCustomer *b);
+// Function to get the number of purchases
+int get_n_purchases(ShoeCustomer customers) {
+    return customers.num_purchases;
+}
+
+// Function to get the name of the customer
+char* get_name(ShoeCustomer customers) {
+    return customers.name;
+}
+
+// Function to swap two customers
+void swap_customers(ShoeCustomer *a, ShoeCustomer *b) {
+    ShoeCustomer temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+// Function to compare two customers
+int compare_customers(ShoeCustomer a, ShoeCustomer b) {
+    int n_purchases_a = get_n_purchases(a);
+    int n_purchases_b = get_n_purchases(b);
+
+    if (n_purchases_a != n_purchases_b) {
+        return n_purchases_a - n_purchases_b;
+    }
+
+    return strcmp(get_name(a), get_name(b));
+}
 
 // PROBLEM 3
 void bubble_sort_customers(ShoeCustomer *customers, size_t n_customers) {

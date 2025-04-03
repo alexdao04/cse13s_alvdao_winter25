@@ -6,7 +6,7 @@ ll_float *delete_range(ll_float *list, float start, float end) {
     // start is the start of the range to delete
     // end is the end of the range to delete
     
-    // This function deletes all nodes in the linked list
+    // this function deletes all nodes in the linked list
     // with values between start and end (inclusive)
     // the function should return the head of the resulting linked list. 
     // if the head of the linked list is deleted,
